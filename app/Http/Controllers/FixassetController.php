@@ -12,7 +12,7 @@ use App\Models\Fixasset;
 
 class FixassetController extends Controller
 {
-    protected $paging = 20;
+    protected $paging = 10;
 
     public function index(Request $request){
         $dataset =Fixasset::where('fa_status','!=','')->orderBy('fa_sec')->orderBy('fa_name')->paginate($this->paging);
