@@ -88,7 +88,7 @@
                                   <thead>
                                     <tr class="headings">
 
-                                      <th class="column-title">Item </th>
+                                      <th class="column-title">ลำดับ </th>
                                       <th class="column-title">แผนก</th>
                                       <th class="column-title">Computer/อุปกรณ์</th>
                                       <th class="column-title">ผู้ใช้งาน </th>
