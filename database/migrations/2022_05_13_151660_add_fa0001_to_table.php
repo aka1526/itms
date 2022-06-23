@@ -14,7 +14,7 @@ class Addfa0001ToTable extends Migration
     public function up()
     {
         Schema::table('fixasset', function (Blueprint $table) {
-              $table->string('fa_ip',200)->default('-');
+              $table->string('fa_ip',200)->nullable()->default('');
 
         });
 
