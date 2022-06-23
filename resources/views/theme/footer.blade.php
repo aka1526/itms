@@ -1,6 +1,6 @@
 <footer>
     <div class="pull-right">
-    qq  Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a>
+     ITAM by <a href="https://www.satangapp.in">AKACHAI</a>
     </div>
     <div class="clearfix"></div>
   </footer>
