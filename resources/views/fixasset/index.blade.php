@@ -71,7 +71,7 @@
                                         @csrf
 
                                     <div class="col-md-5 col-sm-5   ">
-                                        <label for="heard">Search</label>
+                                        <label for="search">Search</label>
                                     <div class="input-group mb-3">
                                         <input type="text" class="form-control form-control-sm" id="search" name="search" value="{{ isset($search) ? $search :''}}"  placeholder="Search…">
                                         <div class="input-group-append">
