@@ -133,7 +133,7 @@
                                                             <i class="fa fa-check"></i> ปรกติ
                                                         </button>
                                                         <button type="button" class="btn btn-success dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                            <span class="sr-only">อนุมัติ</span>
+                                                            <span class="sr-only">ปรกติ</span>
                                                         </button>
 
                                                     @else
