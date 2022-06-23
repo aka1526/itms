@@ -8,7 +8,7 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="_token" content="{{{ csrf_token() }}}"/>
-	<title>@yield('title','Document Control')</title>
+	<title>@yield('title','ITMS')</title>
     @yield('herder_jscss')
 <style>
     @media (max-width: 991px) {
