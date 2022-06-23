@@ -4,11 +4,12 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FixassetController;
 
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 Route::controller(FixassetController::class)->group(function(){
+    Route::get('/','index');
     Route::get('fixasset','index')->name('fa.index');
     Route::get('fixasset/add','add')->name('fa.add');
     Route::post('fixasset/save','save')->name('fa.save');
