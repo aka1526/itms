@@ -22,7 +22,6 @@ class CreateFixassetTable extends Migration
             $table->string('fa_tel',50)->nullable()->default('-');
             $table->string('fa_email',50)->nullable()->default('-');
             $table->string('fa_status',50)->nullable()->default('Y');
-
             $table->string('create_by',200)->nullable()->default('');
             $table->string('create_time',50)->nullable()->default('');
             $table->string('modify_by',200)->nullable()->default('');
