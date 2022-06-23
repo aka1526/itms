@@ -67,7 +67,7 @@
                               <div class="col-md-12">
 
                                 <p>
-                                    <form id="frmSearch" name="frmSearch" action="" method="POST" >
+                                    <form id="frmSearch" name="frmSearch" action="{{ route('fa.search')}}" method="POST" >
                                         @csrf
 
                                     <div class="col-md-5 col-sm-5   ">

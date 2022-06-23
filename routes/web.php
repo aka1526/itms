@@ -16,6 +16,7 @@ Route::controller(FixassetController::class)->group(function(){
     Route::get('fixasset/edit/{UNID}','edit')->name('fa.edit');
     Route::post('fixasset/update','update')->name('fa.update');
     Route::post('fixasset/delete','delete')->name('fa.delete');
+    Route::post('fixasset/search','search')->name('fa.search');
     // Route::post('base/mctype/upstatus','upstatus')->name('base.mctype.upstatus');;
 
 });
