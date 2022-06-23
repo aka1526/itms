@@ -73,7 +73,7 @@
                                     <div class="col-md-5 col-sm-5   ">
                                         <label for="heard">Search</label>
                                     <div class="input-group mb-3">
-                                        <input type="text" class="form-control form-control-sm" id="SEARCH" name="SEARCH" value="{{ isset($SEARCH) ? $SEARCH :''}}"  placeholder="Search…">
+                                        <input type="text" class="form-control form-control-sm" id="search" name="search" value="{{ isset($search) ? $search :''}}"  placeholder="Search…">
                                         <div class="input-group-append">
                                           <button class="btn btn-primary btn-sm" type="sumit" >search</button>
                                         </div>
@@ -170,6 +170,7 @@
                                 {{ $dataset->links('pagination.default',
 										[
 											'paginator' => $dataset,
+                                            'search' => isset($search) ? $search : '',
 											'link_limit' => $dataset->perPage()
 										]) }}
                                   @endif

@@ -26,15 +26,15 @@ class FixassetController extends Controller
     }
 
     public function search(Request $request){
-       $SEARCH=$request->SEARCH;
+       $search=$request->search;
         $dataset =Fixasset::where('fa_status','!=','')
-        ->where(function($query) use ($SEARCH) {
-            if ($SEARCH != '') {
-                return $query->where('fa_name','like', '%'.$SEARCH.'%');
+        ->where(function($query) use ($search) {
+            if ($search != '') {
+                return $query->where('fa_name','like', '%'.$search.'%');
             }
         })
         ->orderBy('fa_sec')->orderBy('fa_name')->paginate($this->paging);
-        return view('fixasset.index',compact('dataset'));
+        return view('fixasset.index',compact('dataset','search'));
 
     }
 

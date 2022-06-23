@@ -27,7 +27,7 @@
               <li class="page-item active"><a class="page-link is-current" aria-label="Goto page {{ $page }}">{{ $page }}</a></li>
               @else
               <li class="page-item ">
-                  <a href="{{ $url.( isset($search) ? '&SEARCH='. $search  : '' ).( isset($status) ? '&STATUS='.$status: '')}}" class="page-link" aria-label="Goto page {{ $page }}">{{ $page }}</a>
+                  <a href="{{ $url.( isset($search) ? '&search='. $search  : '' ).( isset($status) ? '&STATUS='.$status: '')}}" class="page-link" aria-label="Goto page {{ $page }}">{{ $page }}</a>
             </li>
               @endif
             @endforeach
