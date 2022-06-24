@@ -19,7 +19,13 @@ class RepairsController extends Controller
     public function online(Request $request,$uuid){
 
     $data =Fixasset::where('fa_uuid','=',$uuid)->first();
-    $problems =Problems::where('problem_name','!=','')->orderBy('problem_name')->get();
+    $group= $data->fa_type;
+    if( $group=="PC" ||  $group=="NOTEBOOK"){
+        $problems =Problems::where('group','=','COMPUTER')->orderBy('problem_name')->get();
+    } else {
+        $problems =Problems::where('group','!=','COMPUTER')->orderBy('problem_name')->get();
+    }
+
     if($data){
         return view('repairs.online',compact('data','problems'));
     }
