@@ -14,7 +14,7 @@ class CreateFixassetTable extends Migration
     public function up()
     {
         Schema::create('fixasset', function (Blueprint $table) {
-            $table->string('fa_uuid')->primary();
+            $table->string('fa_uuid',50)->primary();
             $table->string('fa_name',50)->nullable()->index();
             $table->string('fa_sec',200)->nullable()->default('');
             $table->string('fa_type',50)->nullable()->default('PC');

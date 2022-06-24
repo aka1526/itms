@@ -11,7 +11,7 @@ class Fixasset extends Model
     const CREATED_AT = 'create_time';
     const UPDATED_AT = 'modify_time';
 
-  protected $primaryKey ='fa_uuid ';
+  protected $primaryKey ='fa_uuid';
   protected $keyType = 'string';
   public $incrementing = false;
   public $timestamps = false;

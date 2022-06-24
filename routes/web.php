@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FixassetController;
-
+use App\Http\Controllers\RepairsController;
 
 // Route::get('/', function () {
 //     return view('welcome');
@@ -22,3 +22,10 @@ Route::controller(FixassetController::class)->group(function(){
 
 });
 
+
+Route::controller(RepairsController::class)->group(function(){
+    Route::get('repairs/online/{uuid}','online')->name('re.online');
+    Route::get('repairs/success','success')->name('re.success');
+
+    Route::post('repairs/save_req','save_req')->name('re.save_req');
+});
