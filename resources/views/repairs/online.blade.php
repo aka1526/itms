@@ -94,9 +94,9 @@
                                           <p class="ratings">
                                             <a>ระดับเร่งด่วน</a><br/>
 
-                                            <a href="#" onclick="setscore('{{ $problem->problem_uuid }}','1')"><span class="fa fa-star star_{{ $problem->problem_uuid }}_1"></span> ปกติ</a>
-                                            <a href="#" onclick="setscore('{{ $problem->problem_uuid }}','2')"><span class="fa fa-star-o star_{{ $problem->problem_uuid }}_2"> </span>ด่วน</a>
-                                            <a href="#" onclick="setscore('{{ $problem->problem_uuid }}','3')"><span class="fa fa-star-o star_{{ $problem->problem_uuid }}_3"> </span>ด่วนที่สุด</a>
+                                            <a href="#" onclick="setscore('{{ $problem->problem_uuid }}','1')"><span class="fa fa-star fa-2x star_{{ $problem->problem_uuid }}_1"></span> ปกติ</a>
+                                            <a href="#" onclick="setscore('{{ $problem->problem_uuid }}','2')"><span class="fa fa-star-o fa-2x  star_{{ $problem->problem_uuid }}_2"> </span>ด่วน</a>
+                                            <a href="#" onclick="setscore('{{ $problem->problem_uuid }}','3')"><span class="fa fa-star-o fa-2x  star_{{ $problem->problem_uuid }}_3"> </span>ด่วนที่สุด</a>
 
                                           </p>
                                         </div>
@@ -239,27 +239,17 @@ $(document).on("click", '.btn-save', function(e) {
             dataType: "json",
             processData: false,
             contentType: false,
-            success: function(data)
-            {
-            if(data.act){
+            success: function(data){
+
                 Swal.fire({
                 icon: data.icon,
                 title: data.title,
-                timer: 1200
+                timer: 1200,
 
                 }).then(() => {
                     location.href='/repairs/success'
                 })
-            }else {
-                Swal.fire({
-                icon: data.icon,
-                title: data.title,
-                timer: 1200
 
-                }).then(() => {
-                    location.href='/errors/500'
-                })
-            }
 
             }
     });

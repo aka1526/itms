@@ -53,6 +53,9 @@
 
     <!-- Custom Theme Scripts -->
     <script src="/custom/js/custom.min.js"></script>
+    <script>
 
+
+    </script>
   </body>
 </html>
