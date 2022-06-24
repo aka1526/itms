@@ -244,7 +244,7 @@ $(document).on("click", '.btn-save', function(e) {
                 Swal.fire({
                 icon: data.icon,
                 title: data.title,
-                timer: 1200,
+
 
                 }).then(() => {
                     location.href='/repairs/success'
