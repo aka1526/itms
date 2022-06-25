@@ -1,4 +1,4 @@
-@extends('theme.main_show')
+@extends('theme.main')
 @section('herder_jscss')
 <!-- Bootstrap -->
 <link href="/asset/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -244,10 +244,10 @@ $(document).on("click", '.btn-save', function(e) {
                 Swal.fire({
                 icon: data.icon,
                 title: data.title,
-
+                    timer:1200,
 
                 }).then(() => {
-                    location.href='/repairs/success'
+                    location.href='/repairs'
                 })
 
 

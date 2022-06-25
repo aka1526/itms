@@ -1,4 +1,4 @@
-@extends('theme.main_show')
+@extends('theme.main')
 @section('herder_jscss')
 <!-- Bootstrap -->
 <link href="/asset/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -47,74 +47,74 @@
                   <div class="x_panel">
 
                         <div class="x_content">
-                            <h2 class="btn-success alert" align="center">แจ้งซ่อมคอมพิวเตอร์/อุปกรณ์</h2>
+                            <h2 class="btn-success alert" align="center">บันทึกแจ้งซ่อมคอมพิวเตอร์/อุปกรณ์</h2>
                             <!-- start form for validation -->
+                            <form id="form2" name="form2" data-parsley-validate="" class="form-horizontal form-label-left" novalidate="" action="{{route('re.updatejob')}}" method="POST">
+                                @csrf
+                                <input type="hidden" id="repair_uuid" class="form-control" name="repair_uuid" value="{{$data->repair_uuid }}" >
+                                <div class="row">
+                                        <div class="col-md-3">
+                                            <label for="com_name">คอมพิวเตอร์/อุปกรณ์</label>
+                                            <input type="text" id="fa_name" class="form-control" name="fa_name" required="" value="{{ $data->fa_name}}" readonly>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label for="repair_date">วันที่แจ้ง</label>
+                                            <input type="text" id="repair_date" class="form-control" name="repair_date" value="{{ \Carbon\Carbon::parse($data->repair_date )->format('d-m-Y');}}" readonly>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="repair_user">ผู้แจ้งซ่อม</label>
+                                            <input type="text" id="repair_user" class="form-control" name="repair_user"  value="{{ $data->repair_user}}" readonly>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="problems_code">ปัญหาที่แจ้ง</label>
+                                            <input type="hidden" id="problems_code" class="form-control" name="problems_code"  value="{{ $data->problems_code}}" >
+                                            <input type="text" id="repair_problem" class="form-control" name="repair_problem"  value="{{ $data->repair_problem}}" readonly>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="repair_priority">ความสำคัญ</label>
 
+                                            <input type="text" id="repair_priority" class="form-control" name="repair_priority"  value="{{ $data->repair_priority}}" readonly>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <label for="repair_cause">สาเหตุ</label>
+                                            <textarea id="repair_cause" name="repair_cause" class="form-control" rows="3" placeholder="สาเหตุ" required></textarea>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <label for="problems_code">วิธีการแก้ไข</label>
+                                            <textarea id="repair_solution" name="repair_solution" class="form-control" rows="3" placeholder="วิธีการแก้ไข"  required></textarea>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label for="repair_costs">ค่าใช้จ่าย</label>
+                                            <input type="number" id="repair_costs" class="form-control" name="repair_costs" min="0" max="1000000" value="{{ $data->repair_costs}}"  >
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label for="repair_checkby">สถานะงาน</label>
+                                            <select class="form-control" id="repair_status" name="repair_status" required>
+                                                <option>Choose option</option>
+                                                <option value="NEW" {{ $data->repair_status =='NEW' ? ' selected' :''}}>แจ้งซ่อม</option>
+                                                <option value="WORKING" {{ $data->repair_status =='WORKING' ? ' selected' :''}}>กำลังซ่อม</option>
+                                                <option value="DONE" {{ $data->repair_status =='DONE' ? ' selected' :''}}>สำเร็จ</option>
 
-                               <div class="row">
+                                            </select>
+                                        </div>
 
-                                <div class="col-md-3">
-                                    <label for="com_name">คอมพิวเตอร์/อุปกรณ์</label>
-                                    <input type="text" id="fa_name" class="form-control" name="fa_name" required="" value="{{ $data->fa_name}}" readonly>
+                                        <div class="col-md-4">
+                                            <label for="repair_checkby">ผู้ดำเนินการ</label>
+                                            <input type="text" id="repair_checkby" class="form-control" name="repair_checkby"  value="{{ $data->repair_checkby}}"  required>
+                                        </div>
+
                                 </div>
-                                <div class="col-md-3">
-                                    <label for="repair_date">วันที่แจ้ง</label>
-                                    <input type="text" id="repair_date" class="form-control" name="repair_date" value="{{ \Carbon\Carbon::now()->format('d-m-Y')}}" readonly>
-                                </div>
-                                <div class="col-md-6">
-                                    <label for="fa_user">ผู้แจ้งซ่อม</label>
-                                    <input type="text" id="fa_user" class="form-control" name="fa_user"  value="{{ $data->fa_user}}" >
-                                </div>
-
-                               </div>
                                <br/>
-                               <div class="row">
-                                @foreach ($problems as $problem)
+                               <div class="form-group row">
+                                <div class="col-md-12 col-sm-12  ">
+                                    <a href="/repairs"   class="btn btn-secondary"> <i class="fa fa-arrow-left"></i> กลับ </a>
+                                    @if($data->repair_status !='DONE')
+                                    <button type="submit" class="btn btn-success">Save</button>
+                                    @endif
 
-                                <div class="col-md-4 col-sm-4  profile_details">
-                                    <form id="{{ $problem->problem_uuid }}" name="{{ $problem->problem_uuid }}" action="{{ route('fa.save')}}" data-parsley-validate enctype="multipart/form-data" method="POST">
-                                        @csrf
-                                        <input type="hidden" id="problem_uuid"  value="{{ $problem->problem_uuid }}">
-                                        <input type="hidden" id="score_{{ $problem->problem_uuid }}"  value="1">
-                                        <input type="hidden" id="fa_uuid" class="form-control" name="fa_uuid" value="{{ $data->fa_uuid}}" >
-                                        <input type="hidden" id="repair_problem_{{ $problem->problem_uuid}}" class="form-control" name="repair_problem_{{ $problem->problem_uuid}}" value="{{ $problem->problem_name}}" >
-                                    <div class="well profile_view">
-                                      <div class="col-sm-12">
-                                        <h4 class="brief text-center alert"><i>แจ้งปัญหาการใช้งาน</i></h4>
-                                        <div class="right col-sm-5 text-center">
-                                            <img src="/img/question.png" alt="" width="80px" class="img-circle img-fluid">
-                                          </div>
-                                        <div class="left col-sm-7">
-                                          <h2 class="text-danger">{{ $problem->problem_name }}</h2>
-                                        </div>
+                                </div>
+                            </div>
 
-                                      </div>
-                                      <div class=" bottom text-center">
-                                        <div class=" col-sm-12 emphasis">
-                                          <p class="ratings">
-                                            <a>ระดับเร่งด่วน</a><br/>
-
-                                            <a href="javascript:void(0)" onclick="setscore('{{ $problem->problem_uuid }}','1')"><span class="fa fa-star fa-2x star_{{ $problem->problem_uuid }}_1"></span> ปกติ</a>
-                                            <a href="javascript:void(0)" onclick="setscore('{{ $problem->problem_uuid }}','2')"><span class="fa fa-star-o fa-2x  star_{{ $problem->problem_uuid }}_2"> </span>ด่วน</a>
-                                            <a href="javascript:void(0)" onclick="setscore('{{ $problem->problem_uuid }}','3')"><span class="fa fa-star-o fa-2x  star_{{ $problem->problem_uuid }}_3"> </span>ด่วนที่สุด</a>
-
-                                          </p>
-                                        </div>
-                                        <div class=" col-sm-12 emphasis">
-
-                                          <button type="button" class="btn btn-success btn-sm btn-block btn-save" data-problem_uuid="{{ $problem->problem_uuid }}">
-                                            <i class="fa fa-bell-o"> </i> แจ้งปัญหา
-                                          </button>
-                                        </div>
-                                      </div>
-                                    </div>
-                                </form>
-                                  </div>
-                                @endforeach
-
-                               </div>
-
-                                <br />
                                 {{-- <a href="/fixasset"   class="btn btn-secondary"> <i class="fa fa-arrow-left"></i> กลับ </a>
                                 <button type="submit" class="btn btn-success"><i class="fa fa-save"></i> บันทึกข้อมูล</button> --}}
 

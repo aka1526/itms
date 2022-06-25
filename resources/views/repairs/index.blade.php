@@ -41,10 +41,10 @@
                 <div class="col-md-12 col-sm-12 ">
                   <div class="x_panel">
                         <div class="x_title">
-                            <h2>รายการคอมพิวเตอร์และอุปกรณ์</h2>
+                            <h2>รายการแจ้งซ่อมคอมพิวเตอร์และอุปกรณ์</h2>
                             <ul class="nav navbar-right panel_toolbox">
 								<li>
-                                    <button type="button" class="btn btn-success btn-sm" onclick="location.href='{{route("fa.add")}}';">
+                                    <button type="button" class="btn btn-success btn-sm" onclick="location.href='{{route("fa.index")}}';">
                                     <i class="fa fa-plus"></i> เพิ่มข้อมูล</button>
                                 </li>
 
@@ -67,7 +67,7 @@
                               <div class="col-md-12">
 
                                 <p>
-                                    <form id="frmSearch" name="frmSearch" action="{{ route('fa.search')}}" method="POST" >
+                                    <form id="frmSearch" name="frmSearch" action="{{ route('re.index')}}" method="POST" >
                                         @csrf
 
                                     <div class="col-md-5 col-sm-5   ">
@@ -89,18 +89,14 @@
                                     <tr class="headings">
 
                                       <th class="column-title">ลำดับ </th>
-                                      <th class="column-title">แผนก</th>
+                                      <th class="column-title">เอกสาร</th>
                                       <th class="column-title">Computer/อุปกรณ์</th>
-                                      <th class="column-title">ผู้ใช้งาน </th>
-                                      <th class="column-title">เบอร์โต๊ะ </th>
-                                      <th class="column-title">E-mail </th>
-                                      <th class="column-title">IP Address </th>
-                                      <th class="column-title">แผนก/สถานที่ </th>
-                                      <th class="column-title">ประเภท</th>
-
-
-                                      <th class="column-title">Action </th>
-
+                                      <th class="column-title">ชื่อผู้แจ้ง</th>
+                                      <th class="column-title">ปัญหา/งานซ่อม </th>
+                                      <th class="column-title">สาเหตุ </th>
+                                      <th class="column-title">วิธีการแก้ไข </th>
+                                      <th class="column-title">ผู้ดำเนินการ </th>
+                                      <th class="column-title">สถานะงาน </th>
                                       <th class="bulk-actions" colspan="7">
                                         <a class="antoo" style="color:#fff; font-weight:500;">Bulk Actions ( <span class="action-cnt"> </span> ) <i class="fa fa-chevron-down"></i></a>
                                       </th>
@@ -114,42 +110,47 @@
                                     <tr class="even pointer">
 
                                         <td class=" "> {{ $dataset->firstItem() + $key }}</td>
-                                        <td class=" "> {{ $row->fa_sec }}</td>
+                                         <td class=" ">  {{ \Carbon\Carbon::parse($row->repair_date )->format('d-m-Y');}}</td>
+                                        <td class=" "> {{ $row->repair_docno }}</td>
                                         <td class=" "> {{ $row->fa_name }}</td>
-                                        <td class=" ">  {{ $row->fa_user}}</td>
-                                        <td class=" ">  {{ $row->fa_tel}}</td>
-                                        <td class=" ">  {{ $row->fa_email}}</td>
-                                        <td class=" "> {{ $row->fa_ip }}</td>
-                                        {{-- <td class=" ">  {{ \Carbon\Carbon::parse($row->DAR_REQ_DATE )->format('d-m-Y');}}</td> --}}
-                                        <td class=" ">  {{ $row->fa_sec}}</td>
-                                        <td class=" ">  {{ $row->fa_type}}</td>
-
+                                        <td class=" ">  {{ $row->repair_user}}</td>
+                                        <td class=" ">  {{ $row->repair_problem}}</td>
+                                        <td class=" ">  {{ $row->repair_solution}}</td>
+                                        <td class=" "> {{ $row->repair_checkby }}</td>
 
                                         <td class=" ">
                                             <div class="btn-group ">
 
-                                                    @if( $row->fa_status=="Y" )
-                                                        <button type="button" class="btn btn-success btn-sm" style="width: 90px;">
-                                                            <i class="fa fa-check"></i> ปกติ
-                                                        </button>
-                                                        <button type="button" class="btn btn-success dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                            <span class="sr-only">ปกติ</span>
-                                                        </button>
-
-                                                    @else
+                                                    @if( $row->repair_status=="NEW" )
                                                         <button type="button" class="btn btn-warning btn-sm" style="width: 90px;">
-                                                            <i class="fa fa-exclamation-circle"></i> จำหน่าย
+                                                            <i class="fa fa-exclamation-circle"></i> แจ้งซ่อม
                                                         </button>
                                                         <button type="button" class="btn btn-warning dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                            <span class="sr-only">จำหน่าย</span>
+                                                            <span class="sr-only"> แจ้งซ่อม</span>
+                                                        </button>
+
+                                                    @elseif( $row->repair_status=="DONE" )
+                                                        <button type="button" class="btn btn-success btn-sm" style="width: 90px;">
+                                                            <i class="fa fa-check-circle"></i>สำเร็จ
+                                                        </button>
+                                                        <button type="button" class="btn btn-success dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                            <span class="sr-only">สำเร็จ</span>
+                                                        </button>
+                                                        @elseif( $row->repair_status=="WORKING" )
+                                                        <button type="button" class="btn btn-info btn-sm" style="width: 90px;">
+                                                            <i class="fa fa-gears"></i>กำลังซ่อม
+                                                        </button>
+                                                        <button type="button" class="btn btn-info dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                            <span class="sr-only">กำลังซ่อม</span>
                                                         </button>
                                                     @endif
 
 
 
                                                 <div class="dropdown-menu">
-                                                    <a class="dropdown-item" href="{{route('fa.edit', $row->fa_uuid)}}"><i class="fa fa-pencil-square"></i> แก้ไขข้อมูล</a>
-                                                    <a class="dropdown-item text-danger btn-delete" href="" data-fa_uuid="{{$row->fa_uuid}}"><i class="fa fa-trash"></i> <strong>ลบข้อมูล</strong></a>
+                                                    <a class="dropdown-item btn-rec" href="javascript:void(0)" data-uuid="{{$row->repair_uuid}}"><i class="fa fa-power-off"></i> รับงานซ่อม</a>
+                                                    <a class="dropdown-item" href="{{route('re.editjob', $row->repair_uuid)}}" ><i class="fa fa-pencil-square"></i> บันทึกการซ่อม</a>
+                                                    <a class="dropdown-item text-danger btn-delete" href="javascript:void(0)" data-uuid="{{$row->repair_uuid}}"><i class="fa fa-trash"></i> <strong>ลบข้อมูล</strong></a>
 
                                                 </div>
                                               </div>
@@ -243,10 +244,46 @@
 
 <script>
 
-$(document).on("click", '.btn-delete', function(e) {
+
+$(document).on("click", '.btn-rec', function(e) {
     e.preventDefault();
 
     Swal.fire({
+        title: 'ยืนยันรับงานซ่อม?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, รับงานซ่อม!'
+    }).then((result) => {
+        if(result.isConfirmed){
+            var uuid=$(this).data('uuid');
+            var url = '/repairs/job/rec';
+            $.ajax({
+                    type: "POST",
+                    url: url,
+                    data:{"_token" :"{{ csrf_token() }}",uuid:uuid},
+                    success: function(data){
+
+                        Swal.fire({
+                        title: data.msg,
+                        timer: 1300,
+                        icon: data.icon,
+                        confirmButtonText: 'OK'
+                        }).then((result) => {
+                            location.reload();
+                        });
+                    }
+            });
+        }
+
+    });
+});
+
+$(document).on("click", '.btn-delete', function(e) {
+    e.preventDefault();
+
+Swal.fire({
   title: 'ยืนยันการลบข้อมูล?',
   icon: 'warning',
   showCancelButton: true,
@@ -255,12 +292,12 @@ $(document).on("click", '.btn-delete', function(e) {
   confirmButtonText: 'Yes, delete it!'
 }).then((result) => {
     if(result.isConfirmed){
-        var fa_uuid = $(this).data('fa_uuid');
-        var url = '/fixasset/delete';
+        var uuid = $(this).data('uuid');
+        var url = '/repairs/job/delete';
         $.ajax({
                 type: "POST",
                 url: url,
-                data:{"_token" : $('meta[name=_token]').attr('content'),fa_uuid:fa_uuid},
+                data:{"_token" : "{{ csrf_token() }}",uuid:uuid},
                 success: function(data){
 
                     Swal.fire({

@@ -3,10 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FixassetController;
 use App\Http\Controllers\RepairsController;
-
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+use App\Http\Controllers\ProblemsController;
 
 Route::controller(FixassetController::class)->group(function(){
     Route::get('/','index');
@@ -24,8 +21,26 @@ Route::controller(FixassetController::class)->group(function(){
 
 
 Route::controller(RepairsController::class)->group(function(){
+
+    Route::match(array('get', 'post'),'/repairs','index')->name('re.index');
+    Route::get('repairs/add/{uuid}','add')->name('re.add');
     Route::get('repairs/online/{uuid}','online')->name('re.online');
     Route::get('repairs/success','success')->name('re.success');
-
+    Route::post('repairs/job/rec','recjob')->name('re.recjob');
+    Route::post('repairs/job/delete','deletejob')->name('re.deletejob');
+    Route::get('repairs/job/edit/{uuid}','editjob')->name('re.editjob');
+    Route::post('repairs/job/update','updatejob')->name('re.updatejob');
     Route::post('repairs/save_req','save_req')->name('re.save_req');
+});
+
+
+Route::controller(ProblemsController::class)->group(function(){
+
+    Route::match(array('get', 'post'),'/problems','index')->name('pb.index');
+    Route::get('problems/add','add')->name('pb.add');
+    Route::post('problems/save','save')->name('pb.save');
+    Route::post('problems/delete','delete')->name('pb.delete');
+    Route::get('problems/edit/{uuid}','edit')->name('pb.edit');
+    Route::post('problems/update','update')->name('pb.update');
+
 });

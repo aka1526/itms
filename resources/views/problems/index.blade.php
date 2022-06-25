@@ -44,7 +44,7 @@
                             <h2>รายการคอมพิวเตอร์และอุปกรณ์</h2>
                             <ul class="nav navbar-right panel_toolbox">
 								<li>
-                                    <button type="button" class="btn btn-success btn-sm" onclick="location.href='{{route("fa.add")}}';">
+                                    <button type="button" class="btn btn-success btn-sm" onclick="location.href='{{route('pb.add')}}'">
                                     <i class="fa fa-plus"></i> เพิ่มข้อมูล</button>
                                 </li>
 
@@ -67,7 +67,7 @@
                               <div class="col-md-12">
 
                                 <p>
-                                    <form id="frmSearch" name="frmSearch" action="{{ route('fa.search')}}" method="POST" >
+                                    <form id="frmSearch" name="frmSearch" action="{{ route('pb.index')}}" method="POST" >
                                         @csrf
 
                                     <div class="col-md-5 col-sm-5   ">
@@ -89,15 +89,9 @@
                                     <tr class="headings">
 
                                       <th class="column-title">ลำดับ </th>
-                                      <th class="column-title">แผนก</th>
-                                      <th class="column-title">Computer/อุปกรณ์</th>
-                                      <th class="column-title">ผู้ใช้งาน </th>
-                                      <th class="column-title">เบอร์โต๊ะ </th>
-                                      <th class="column-title">E-mail </th>
-                                      <th class="column-title">IP Address </th>
-                                      <th class="column-title">แผนก/สถานที่ </th>
-                                      <th class="column-title">ประเภท</th>
-
+                                      <th class="column-title">รหัส</th>
+                                      <th class="column-title">ชื่อปัญหา</th>
+                                      <th class="column-title">ประเภท </th>
 
                                       <th class="column-title">Action </th>
 
@@ -114,45 +108,40 @@
                                     <tr class="even pointer">
 
                                         <td class=" "> {{ $dataset->firstItem() + $key }}</td>
-                                        <td class=" "> {{ $row->fa_sec }}</td>
-                                        <td class=" "> {{ $row->fa_name }}</td>
-                                        <td class=" ">  {{ $row->fa_user}}</td>
-                                        <td class=" ">  {{ $row->fa_tel}}</td>
-                                        <td class=" ">  {{ $row->fa_email}}</td>
-                                        <td class=" "> {{ $row->fa_ip }}</td>
-                                        {{-- <td class=" ">  {{ \Carbon\Carbon::parse($row->DAR_REQ_DATE )->format('d-m-Y');}}</td> --}}
-                                        <td class=" ">  {{ $row->fa_sec}}</td>
-                                        <td class=" ">  {{ $row->fa_type}}</td>
+                                        <td class=" "> {{ $row->problem_code }}</td>
+                                        <td class=" "> {{ $row->problem_name }}</td>
+                                        <td class=" ">  {{ $row->group}}</td>
 
+                                        {{-- <td class=" ">  {{ \Carbon\Carbon::parse($row->DAR_REQ_DATE )->format('d-m-Y');}}</td> --}}
 
                                         <td class=" ">
                                             <div class="btn-group ">
 
-                                                    @if( $row->fa_status=="Y" )
+                                                    @if( $row->problems_status=="Y" )
                                                         <button type="button" class="btn btn-success btn-sm" style="width: 90px;">
-                                                            <i class="fa fa-check"></i> ปกติ
+                                                            <i class="fa fa-check"></i> แสดง
                                                         </button>
                                                         <button type="button" class="btn btn-success dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                            <span class="sr-only">ปกติ</span>
+                                                            <span class="sr-only">แสดง</span>
                                                         </button>
 
                                                     @else
-                                                        <button type="button" class="btn btn-warning btn-sm" style="width: 90px;">
-                                                            <i class="fa fa-exclamation-circle"></i> จำหน่าย
+                                                        <button type="button" class="btn btn-secondary btn-sm" style="width: 90px;">
+                                                            <i class="fa fa-exclamation-circle"></i> ซ่อน
                                                         </button>
-                                                        <button type="button" class="btn btn-warning dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                            <span class="sr-only">จำหน่าย</span>
+                                                        <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                            <span class="sr-only">ซ่อน</span>
                                                         </button>
                                                     @endif
 
 
 
                                                 <div class="dropdown-menu">
-                                                    <a class="dropdown-item" href="{{route('re.add', $row->fa_uuid)}}"><i class="fa fa-pencil-square"></i> แจ้งซ่อม</a>
-                                                    <a class="dropdown-item" href="{{route('fa.edit', $row->fa_uuid)}}"><i class="fa fa-pencil-square"></i> แก้ไขข้อมูล</a>
+
+                                                    <a class="dropdown-item" href="{{route('pb.edit', $row->problem_uuid)}}"><i class="fa fa-pencil-square"></i> แก้ไขข้อมูล</a>
 
 
-                                                    <a class="dropdown-item text-danger btn-delete" href="" data-fa_uuid="{{$row->fa_uuid}}"><i class="fa fa-trash"></i> <strong>ลบข้อมูล</strong></a>
+                                                    <a class="dropdown-item text-danger btn-delete" href="" data-uuid="{{$row->problem_uuid}}"><i class="fa fa-trash"></i> <strong>ลบข้อมูล</strong></a>
 
                                                 </div>
                                               </div>
@@ -258,12 +247,12 @@ $(document).on("click", '.btn-delete', function(e) {
   confirmButtonText: 'Yes, delete it!'
 }).then((result) => {
     if(result.isConfirmed){
-        var fa_uuid = $(this).data('fa_uuid');
-        var url = '/fixasset/delete';
+        var uuid = $(this).data('uuid');
+        var url = '/problems/delete';
         $.ajax({
                 type: "POST",
                 url: url,
-                data:{"_token" : $('meta[name=_token]').attr('content'),fa_uuid:fa_uuid},
+                data:{"_token" : $('meta[name=_token]').attr('content'),uuid:uuid},
                 success: function(data){
 
                     Swal.fire({
@@ -281,44 +270,6 @@ $(document).on("click", '.btn-delete', function(e) {
 });
 
 });
-
-$(document).ready(function(){
-        $("input:checkbox").click(function() {
-            var checked="N";
-            var unid = $(this).data('unid');
-            var url = '/doctype/a/upstatus';
-
-            if($(this).is(":checked")) {
-                var checked="Y";
-
-            }
-
-           $.ajax({
-                    url: url,
-                    type: 'POST',
-                    data:{"_token" : $('meta[name=_token]').attr('content'),UNID:unid,CHECKED:checked},
-                    success: function(data){
-                        Swal.fire({
-                        title: data.msg,
-                        timer: 1300,
-                        icon: data.result,
-                        confirmButtonText: 'OK'
-                        }).then((result) => {
-                        location.reload();
-                    });
-                    }
-                });
-
-
-        });
-    });
-
-
-function timeFunctionLong(input) {
-setTimeout(function() {
-    input.type = 'date';
- }, 5000);
-}
 
 
  </script>
