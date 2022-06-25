@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FixassetController;
 use App\Http\Controllers\RepairsController;
 use App\Http\Controllers\ProblemsController;
+use App\Http\Controllers\PeriodsController;
 
 Route::controller(FixassetController::class)->group(function(){
     Route::get('/','index');
@@ -44,3 +45,16 @@ Route::controller(ProblemsController::class)->group(function(){
     Route::post('problems/update','update')->name('pb.update');
 
 });
+
+
+Route::controller(PeriodsController::class)->group(function(){
+
+    Route::match(array('get', 'post'),'/periods','index')->name('pe.index');
+    Route::get('periods/add','add')->name('pe.add');
+    Route::post('periods/save','save')->name('pe.save');
+    Route::post('periods/delete','delete')->name('pe.delete');
+    Route::get('periods/edit/{uuid}','edit')->name('pe.edit');
+    Route::post('periods/update','update')->name('pe.update');
+
+});
+

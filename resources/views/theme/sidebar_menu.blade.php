@@ -8,6 +8,7 @@
             <li><a href="/repairs">รายการแจ้งซ่อม</a></li>
             <li><a href="/fixasset">รายการคอมพิวเตอร์</a></li>
             <li><a href="/problems">ข้อมูลปัญหา</a></li>
+            <li><a href="/periods">ข้อมูลรอบเวลา</a></li>
           </ul>
         </li>
         </ul>
