@@ -87,6 +87,22 @@
                                     <label for="fa_ip">IP Address</label>
                                     <input type="text" id="fa_ip" class="form-control" name="fa_ip"  >
                                 </div>
+
+                                <div class="col-md-3">
+                                    <label for="pm_last_date">บำรุงรักษาเมื่อ</label>
+                                    <input type="date" id="pm_last_date" class="form-control" name="pm_last_date"  required >
+                                </div>
+
+                                <div class="col-md-3">
+                                    <label for="pm_interval">รอบบำรุงรักษา</label>
+                                    <select class="form-control" id="pm_interval" name="pm_interval" required>
+                                        @foreach ($Periods as $period)
+                                        <option value="{{$period->periods_interval}}"  >{{ $period->periods_name}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+
+
                                 <div class="col-md-3">
                                     <label for="fa_type">Type</label>
                                     <select class="form-control" id="fa_type" name="fa_type"  class="form-control" required="">

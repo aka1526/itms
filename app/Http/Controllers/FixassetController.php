@@ -9,6 +9,8 @@ use Illuminate\Support\Str;
 use Carbon\Carbon;
 
 use App\Models\Fixasset;
+use App\Models\Periods;
+
 
 class FixassetController extends Controller
 {
@@ -21,7 +23,9 @@ class FixassetController extends Controller
     }
 
     public function add(Request $request){
-        return view('fixasset.add');
+        $Periods=Periods::where('periods_uuid','!=','')->orderBy('periods_interval')->get();
+
+        return view('fixasset.add',compact('Periods'));
 
     }
 
@@ -46,6 +50,11 @@ class FixassetController extends Controller
         $fa_tel= isset($request->fa_tel)  ? $request->fa_tel : '';
         $fa_email= isset($request->fa_email)  ? $request->fa_email : '';
         $fa_type= isset($request->fa_type)  ? $request->fa_type : '';
+        $date_buy= isset($request->date_buy) ? Carbon::parse($request->date_buy )->format('Y-m-d') : null;
+
+        $pm_last_date= isset($request->pm_last_date) ? Carbon::parse($request->pm_last_date )->format('Y-m-d') : null;
+        $pm_interval =isset($request->pm_interval)  ? $request->pm_interval : 0;
+
         $fa_status='Y';
         $create_by ='admin';
         $create_time =Carbon::now()->format("Y-m-d H:i:s");
@@ -61,6 +70,9 @@ class FixassetController extends Controller
             ,'fa_tel'=> $fa_tel
             ,'fa_email'=> $fa_email
             ,'fa_status'=> $fa_status
+            ,'date_buy' =>$date_buy
+            ,'pm_last_date' =>$pm_last_date
+            ,'pm_interval' =>$pm_interval
            ,'create_by'=> $create_by
            ,'create_time'=> $create_time
            ,'modify_by'=> $modify_by
@@ -76,7 +88,8 @@ class FixassetController extends Controller
     public function edit(Request $request,$fa_uuid){
 
         $dataset =Fixasset::where('fa_uuid','=',$fa_uuid)->first();
-         return view('fixasset.edit',compact('dataset'));
+        $Periods=Periods::where('periods_uuid','!=','')->orderBy('periods_interval')->get();
+         return view('fixasset.edit',compact('dataset','Periods'));
 
     }
 
@@ -92,7 +105,10 @@ class FixassetController extends Controller
 
         $fa_vender= isset($request->fa_vender)  ? $request->fa_vender : '';
         $fa_status= isset($request->fa_status)  ? $request->fa_status : 'N';
-        $date_buy= isset($request->date_buy) ? Carbon::parse($request->date_buy )->format('d-m-Y') : null;
+        $date_buy= isset($request->date_buy) ? Carbon::parse($request->date_buy )->format('Y-m-d') : null;
+
+        $pm_last_date= isset($request->pm_last_date) ? Carbon::parse($request->pm_last_date )->format('Y-m-d') : null;
+        $pm_interval =isset($request->pm_interval)  ? $request->pm_interval : 0;
 
         $create_by ='admin';
         $create_time =Carbon::now()->format("Y-m-d H:i:s");
@@ -110,7 +126,8 @@ class FixassetController extends Controller
             ,'fa_status'=> $fa_status
             ,'date_buy'=> $date_buy
             ,'fa_vender'=> $fa_vender
-
+            ,'pm_last_date' => $pm_last_date
+            ,'pm_interval' =>$pm_interval
            ,'modify_by'=> $modify_by
            ,'modify_time'=> $modify_time
         ]);

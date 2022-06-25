@@ -39,7 +39,7 @@
                 <div class="col-md-12 col-sm-12 ">
                   <div class="x_panel">
                         <div class="x_title">
-                            <h2 align="center">ข้อมูลรอบระยะเวลา</h2>
+                            <h2 align="center">แก้ไขข้อมูลรอบระยะเวลา</h2>
                             <div class="clearfix"></div>
                         </div>
                         <div class="x_content">

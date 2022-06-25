@@ -96,6 +96,19 @@
                                     <label for="fa_ip">IP Address</label>
                                     <input type="text" id="fa_ip" class="form-control" name="fa_ip"  value="{{ $dataset->fa_ip}}" >
                                 </div>
+                                <div class="col-md-3">
+                                    <label for="pm_last_date">บำรุงรักษาเมื่อ</label>
+                                    <input type="{{ isset($dataset->pm_last_date) ? 'text' :'date'}}" id="pm_last_date" class="form-control" name="pm_last_date"  value="{{ $dataset->pm_last_date}}" >
+                                </div>
+
+                                <div class="col-md-3">
+                                    <label for="pm_interval">รอบบำรุงรักษา</label>
+                                    <select class="form-control" id="pm_interval" name="pm_interval">
+                                        @foreach ($Periods as $period)
+                                        <option value="{{$period->periods_interval}}" {{ $period->periods_interval== $dataset->pm_interval ? ' selected' : '' }}>{{ $period->periods_name}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
 
                                 <div class="col-md-3">
                                     <label for="fa_status">สถานะ</label>
