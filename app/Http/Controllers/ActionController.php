@@ -177,19 +177,57 @@ class ActionController extends Controller
         if($act){
 
 
-            Pmplans::where('pm_uuid','=',$plan_uuid)->update([
+         $newplan= Pmplans::where('pm_uuid','=',$plan_uuid)
+            ->where('pm_status','!=','Y')->update([
                 'pm_act_date' =>Carbon::now()->format("Y-m-d")
                 ,'pm_status' =>"Y"
             ]);
 
+
             $dt =Pmplans::where('pm_uuid','=',$plan_uuid)->first();
             $fa =Fixasset::where('fa_uuid','=',$dt->fa_uuid)->first();
+
+            if($newplan){
+
+                $pm_interval=$fa->pm_interval>0 ? $fa->pm_interval : 12;
+
+                $currentDateTime = Carbon::now();
+                $nextDate = Carbon::now()->addMonths($pm_interval);
+
+                 if(date('N', strtotime($nextDate)) >= 6){
+                    $nextDate = $nextDate->addDays(3);
+                 }
+
+                $pm_date= $nextDate->format("Y-m-d");
+                $pm_year=$nextDate->format("Y");
+                $pm_month =$nextDate->format("n");
+                $_uuid= str_replace('-','',Str::uuid());
+                Pmplans::insert([
+                    'pm_uuid' =>$_uuid
+                    , 'pm_date' => $pm_date
+                    , 'pm_year' =>$pm_year
+                    , 'pm_month' =>$pm_month
+                    , 'fa_uuid'=>$fa->fa_uuid
+                    , 'pm_act_date' =>null
+                    , 'pm_status' =>'N'
+                    , 'create_by' =>$create_by
+                    , 'create_time'=>$create_time
+                    , 'modify_by'=>$modify_by
+                    , 'modify_time'=>$modify_time
+                ]);
+
+
+            }
+
+
+
             $_uuid= str_replace('-','',Str::uuid());
 
             $ref_docno="PM".Carbon::parse($dt->pm_date )->format('Ymd').$fa->fa_name;
             $repair_month =Carbon::parse($dt->pm_act_date )->format('n');
             $repair_year =Carbon::parse($dt->pm_act_date )->format('Y');
             $check=Historys::where('ref_uuid','=',$dt->pm_uuid)->count();
+
             if($check==0){
                 Historys::insert([
                     'uuid' =>$_uuid
