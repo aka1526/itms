@@ -9,6 +9,7 @@
             <li><a href="/fixasset">รายการคอมพิวเตอร์</a></li>
             <li><a href="/problems">ข้อมูลปัญหา</a></li>
             <li><a href="/periods">ข้อมูลรอบเวลา</a></li>
+            <li><a href="/checklists">ข้อมูล Check List</a></li>
           </ul>
         </li>
         </ul>

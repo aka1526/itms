@@ -11,6 +11,11 @@ use Carbon\Carbon;
 use App\Models\Fixasset;
 use App\Models\Repairs;
 use App\Models\Problems;
+use App\Models\Pmplans;
+use App\Models\Pmresults;
+use App\Models\Checklists;
+use App\Models\Historys;
+
 
 class ActionController extends Controller
 {
@@ -45,7 +50,198 @@ class ActionController extends Controller
 
     }
 
+    public function pm(Request $request){
 
+        $uuid=$request->fa_uuid;
+        $year=Carbon::now()->format("Y");
+        $fa =Fixasset::where('fa_uuid','=',$uuid)->first();
+        $pm =Pmplans::where('pm_year','=',$year)->where('fa_uuid','=',$uuid)->get();
+        return view('actions.pm',compact('uuid', 'pm','fa'));
+
+
+    }
+
+    public function savepm(Request $request){
+
+        $fa_uuid=isset($request->fa_uuid) ? $request->fa_uuid : '';
+        $pm_date=isset($request->pm_plan_date) ? $request->pm_plan_date : '';
+
+        $pm_date= Carbon::parse($pm_date )->format('Y-m-d');
+        $pm_year= Carbon::parse($pm_date )->format('Y');
+        $pm_month= Carbon::parse($pm_date )->format('n');
+
+        $create_by ='admin';
+        $create_time =Carbon::now()->format("Y-m-d H:i:s");
+        $modify_by='admin';
+        $modify_time=Carbon::now()->format("Y-m-d H:i:s");
+        $pm =Pmplans::where('pm_year','=',$pm_year)->where('fa_uuid','=',$fa_uuid)->count();
+
+        if( $pm_date && $pm==0){
+
+            $pm_uuid= str_replace('-','',Str::uuid());
+            $act=  Pmplans::insert([
+                'pm_uuid' =>$pm_uuid
+                , 'pm_date' =>$pm_date
+                , 'pm_year' =>$pm_year
+                , 'pm_month' =>$pm_month
+                , 'fa_uuid' =>$fa_uuid
+                , 'pm_act_date' =>null
+                , 'pm_status' =>'N'
+                , 'create_by' =>$create_by
+                , 'create_time' =>$create_time
+                , 'modify_by' =>$modify_by
+                , 'modify_time' =>$modify_time
+            ]);
+        }
+        $uuid= $fa_uuid;
+        $fa =Fixasset::where('fa_uuid','=',$uuid)->first();
+        $pm =Pmplans::where('pm_year','=',$pm_year)->where('fa_uuid','=',$uuid)->get();
+        return view('actions.pm',compact('uuid', 'pm','fa'));
+    }
+
+    public function pmplan(Request $request,$plan_uuid){
+
+        $check = Pmresults::where('plan_uuid','=',$plan_uuid)->count();
+        $plan =Pmplans::where('pm_uuid','=',$plan_uuid )->first();
+
+
+         $ac_date= Carbon::now()->format('Y-m-d');
+         $ac_year= Carbon::now()->format('Y');
+         $ac_month= Carbon::now()->format('n');
+
+
+        $create_by ='admin';
+        $create_time =Carbon::now()->format("Y-m-d H:i:s");
+        $modify_by='admin';
+        $modify_time=Carbon::now()->format("Y-m-d H:i:s");
+
+        $fa =Fixasset::where('fa_uuid','=',$plan->fa_uuid)->first();
+        $fa_uuid=   $fa->fa_uuid;
+        if($check==0){
+
+            $lists =Checklists::where('ch_desc','!=','')->get();
+            foreach ($lists as $key => $list) {
+                $ac_uuid= str_replace('-','',Str::uuid());
+                Pmresults::insert([
+                    'ac_uuid' => $ac_uuid
+                    , 'ac_year' =>$ac_year
+                    , 'ac_month'=>$ac_month
+                    , 'ac_date'=>$ac_date
+                    , 'plan_uuid'=>$plan->pm_uuid
+                    , 'fa_uuid'=>$plan->fa_uuid
+                    , 'fa_name'=>$fa->fa_name
+                    , 'ac_item'=>$list->ch_item
+                    , 'ac_desc'=>$list->ch_desc
+                    , 'ac_method'=>$list->ch_method
+                    , 'ac_std'=>$list->ch_std
+                    , 'ac_result'=>''
+
+                    , 'create_by'=>$create_by
+                    , 'create_time'=>$create_time
+                    , 'modify_by'=>$modify_by
+                    , 'modify_time'=>$modify_time
+                ]);
+            }
+
+        }
+
+        $pmlist =Pmresults::where('plan_uuid','=',$plan_uuid )->orderBy('ac_item')->get();
+        $uuid=$fa_uuid;
+
+        return view('actions.pmcheck',compact('pmlist','uuid','plan_uuid'));
+
+    }
+
+    public function pmplansave(Request $request){
+
+        $inputs = $request->all();
+        $plan_uuid = $request->plan_uuid;
+        $create_by ='admin';
+        $create_time =Carbon::now()->format("Y-m-d H:i:s");
+        $modify_by='admin';
+        $modify_time=Carbon::now()->format("Y-m-d H:i:s");
+        $act=false;
+        foreach($inputs as $key => $value){
+            $contents = explode("_",$key);
+            if($contents[0]){
+                $ac_uuid=$contents[1];
+                $act=  Pmresults::where('plan_uuid','=',$plan_uuid)->where('ac_uuid','=',$ac_uuid)->update([
+                    'ac_result'=>$value
+                    ,'modify_time'=>$modify_time
+                    ,'modify_by' =>$modify_by
+                ]) ;
+            }
+
+        }
+
+        if($act){
+
+
+            Pmplans::where('pm_uuid','=',$plan_uuid)->update([
+                'pm_act_date' =>Carbon::now()->format("Y-m-d")
+                ,'pm_status' =>"Y"
+            ]);
+
+            $dt =Pmplans::where('pm_uuid','=',$plan_uuid)->first();
+            $fa =Fixasset::where('fa_uuid','=',$dt->fa_uuid)->first();
+            $_uuid= str_replace('-','',Str::uuid());
+
+            $ref_docno="PM".Carbon::parse($dt->pm_date )->format('Ymd').$fa->fa_name;
+            $repair_month =Carbon::parse($dt->pm_act_date )->format('n');
+            $repair_year =Carbon::parse($dt->pm_act_date )->format('Y');
+            $check=Historys::where('ref_uuid','=',$dt->pm_uuid)->count();
+            if($check==0){
+                Historys::insert([
+                    'uuid' =>$_uuid
+                    , 'ref_docno'=> $ref_docno
+                    , 'ref_uuid' =>$dt->pm_uuid
+                    , 'ref_date'=>$dt->pm_act_date
+                    , 'repair_year'=> $repair_year
+                    , 'repair_month'=>$repair_month
+                    , 'fa_uuid'=>$dt->fa_uuid
+                    , 'fa_name'=>$fa->fa_name
+                    , 'fa_user'=>$fa->fa_user
+                    , 'checkby'=>$modify_by
+                    , 'data_type'=>'PM'
+                    , 'data_problem'=>"ตรวจเช็คตามแผน"
+                    , 'data_cause'=>"ตรวจเช็คตามแผน"
+                    , 'data_solution'=>"เช็คได้ตามแผน"
+                    , 'data_costs'=> 0
+                    , 'create_by'=>$create_by
+                    , 'create_time'=>$create_time
+                    , 'modify_by'=>$modify_by
+                    , 'modify_time'=>$modify_time
+                ]);
+            }
+
+         //  dd($repair_year);
+
+        }
+
+
+
+        $pm =Pmplans::where('pm_uuid','=',$plan_uuid)->first();
+       return Redirect::to('/actions/act/'. $pm ->fa_uuid)->with('msg', $act);
+
+    }
+
+    public function pmresult(Request $request,$uuid){
+
+        $pmlist=  Pmresults::where('plan_uuid','=',$uuid)->orderBy('ac_item')->get();
+        $uuid=$pmlist[0]->fa_uuid;
+        $plan_uuid=$uuid;
+        return view('actions.pmresult',compact('pmlist','uuid','plan_uuid'));
+
+    }
+
+    public function report(Request $request){
+        $uuid= $request->fa_uuid;
+        $fa =Fixasset::where('fa_uuid','=',$uuid)->first();
+        $data =Historys::where('fa_uuid','=',$uuid)->orderBy('create_time','desc')
+        ->paginate($this->paging);
+        return view('actions.report',compact('data','fa'));
+
+    }
 
 
 

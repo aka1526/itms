@@ -11,6 +11,8 @@ use Carbon\Carbon;
 use App\Models\Fixasset;
 use App\Models\Repairs;
 use App\Models\Problems;
+use App\Models\Historys;
+
 
 class RepairsController extends Controller
 {
@@ -260,6 +262,31 @@ class RepairsController extends Controller
             if($repair_status=='DONE'){
                 Repairs::where('repair_uuid','=',$repair_uuid)->update([
                     'date_close' =>Carbon::now()->format("Y-m-d")
+                ]);
+
+                $dt =Repairs::where('repair_uuid','=',$repair_uuid)->first();
+                $_uuid= str_replace('-','',Str::uuid());
+
+                Historys::insert([
+                    'uuid' =>$_uuid
+                    , 'ref_docno'=>$dt->repair_docno
+                    , 'ref_uuid' =>$dt->repair_uuid
+                    , 'ref_date'=>$dt->repair_date
+                    , 'repair_year'=>$dt->repair_year
+                    , 'repair_month'=>$dt->repair_month
+                    , 'fa_uuid'=>$dt->fa_uuid
+                    , 'fa_name'=>$dt->fa_name
+                    , 'fa_user'=>$dt->repair_user
+                    , 'checkby'=>$dt->repair_checkby
+                    , 'data_type'=>'REPAIR'
+                    , 'data_problem'=>$dt->repair_problem
+                    , 'data_cause'=>$dt->repair_cause
+                    , 'data_solution'=>$dt->repair_solution
+                    , 'data_costs'=>$dt->repair_costs
+                    , 'create_by'=>$create_by
+                    , 'create_time'=>$create_time
+                    , 'modify_by'=>$modify_by
+                    , 'modify_time'=>$modify_time
                 ]);
             }
 

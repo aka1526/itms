@@ -47,7 +47,9 @@
                   <div class="x_panel">
 
                         <div class="x_content">
-                            <h2 class="btn-success alert" align="center">แจ้งซ่อม/แผนบำรุงรํกษา/รายงาน คอมพิวเตอร์/อุปกรณ์</h2>
+                            <h2 class="btn-success alert" align="center">แจ้งซ่อม/แผนบำรุงรํกษา/รายงาน คอมพิวเตอร์และอุปกรณ์::  {{ $data->fa_name}}</h2>
+
+
                             <!-- start form for validation -->
 
                                <br/>
@@ -85,7 +87,7 @@
                                 </div>
 
                                 <div class="col align-self-center  profile_details">
-                                    <form id="frm_pm" name="frm_pm" action="" data-parsley-validate enctype="multipart/form-data" method="POST">
+                                    <form id="frm_pm" name="frm_pm" action="{{ route('ac.pm')}}" data-parsley-validate enctype="multipart/form-data" method="POST">
                                         @csrf
 
                                         <input type="hidden" id="fa_uuid" class="form-control" name="fa_uuid" value="{{ $data->fa_uuid}}" >
@@ -105,8 +107,8 @@
 
                                         <div class=" col-sm-12 emphasis">
 
-                                          <button type="button" class="btn btn-warning btn-sm btn-block " data-problem_uuid="">
-                                            <i class="fa fa-bell-o"> </i> แจ้งปัญหา
+                                          <button type="submit" class="btn btn-warning btn-sm btn-block " data-problem_uuid="">
+                                            <i class="fa fa-bell-o"> </i> ดำเนินการตรวจเช็ค
                                           </button>
                                         </div>
                                       </div>
@@ -115,7 +117,7 @@
                                 </div>
 
                                 <div class="col align-self-end  profile_details" ">
-                                    <form id="frm_report" name="frm_report" action="" data-parsley-validate enctype="multipart/form-data" method="POST">
+                                    <form id="frm_report" name="frm_report" action="{{route('ac.report')}}" data-parsley-validate enctype="multipart/form-data" method="POST">
                                         @csrf
 
                                         <input type="hidden" id="fa_uuid" class="form-control" name="fa_uuid" value="{{ $data->fa_uuid}}" >
@@ -136,7 +138,7 @@
                                         <div class=" col-sm-12 emphasis">
 
 
-                                          <button type="button" class="btn btn-info btn-sm btn-block " data-problem_uuid="">
+                                          <button type="submit" class="btn btn-info btn-sm btn-block " data-problem_uuid="">
                                             <i class="fa fa-bell-o"> </i> แจ้งปัญหา
                                           </button>
                                         </div>

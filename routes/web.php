@@ -6,6 +6,7 @@ use App\Http\Controllers\RepairsController;
 use App\Http\Controllers\ProblemsController;
 use App\Http\Controllers\PeriodsController;
 use App\Http\Controllers\ActionController;
+use App\Http\Controllers\ChecklistsController;
 
 Route::controller(FixassetController::class)->group(function(){
     Route::get('/','index');
@@ -24,7 +25,13 @@ Route::controller(ActionController::class)->group(function(){
     Route::get('actions/act/{uuid}','act')->name('ac.act');
     Route::post('actions/repaire','repaire')->name('ac.repaire');
 
+    Route::post('actions/pm','pm')->name('ac.pm');
+    Route::post('actions/pm/savepm','savepm')->name('ac.savepm');
+    Route::get('actions/pm/plan/{uuid}','pmplan')->name('ac.pmplan');
+    Route::post('actions/pm/plan/save','pmplansave')->name('ac.pmplansave');
+    Route::get('actions/pm/result/{uuid}','pmresult')->name('ac.pmresult');
 
+    Route::post('actions/report','report')->name('ac.report');
 });
 
 Route::controller(RepairsController::class)->group(function(){
@@ -62,6 +69,18 @@ Route::controller(PeriodsController::class)->group(function(){
     Route::post('periods/delete','delete')->name('pe.delete');
     Route::get('periods/edit/{uuid}','edit')->name('pe.edit');
     Route::post('periods/update','update')->name('pe.update');
+
+});
+
+
+Route::controller(ChecklistsController::class)->group(function(){
+
+    Route::match(array('get', 'post'),'/checklists','index')->name('ch.index');
+    Route::get('checklists/add','add')->name('ch.add');
+    Route::post('checklists/save','save')->name('ch.save');
+    Route::post('checklists/delete','delete')->name('ch.delete');
+    Route::get('checklists/edit/{uuid}','edit')->name('ch.edit');
+    Route::post('checklists/update','update')->name('ch.update');
 
 });
 
