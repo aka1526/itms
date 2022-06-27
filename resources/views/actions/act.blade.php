@@ -85,7 +85,7 @@
                                 </div>
 
                                 <div class="col align-self-center  profile_details">
-                                    <form id="frm_pm" name="frm_pm" action="{{ route('fa.save')}}" data-parsley-validate enctype="multipart/form-data" method="POST">
+                                    <form id="frm_pm" name="frm_pm" action="" data-parsley-validate enctype="multipart/form-data" method="POST">
                                         @csrf
 
                                         <input type="hidden" id="fa_uuid" class="form-control" name="fa_uuid" value="{{ $data->fa_uuid}}" >
