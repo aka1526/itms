@@ -47,70 +47,103 @@
                   <div class="x_panel">
 
                         <div class="x_content">
-                            <h2 class="btn-success alert" align="center">แจ้งซ่อมคอมพิวเตอร์/อุปกรณ์</h2>
+                            <h2 class="btn-success alert" align="center">แจ้งซ่อม/แผนบำรุงรํกษา/รายงาน คอมพิวเตอร์/อุปกรณ์</h2>
                             <!-- start form for validation -->
 
-
-                               <div class="row">
-
-                                <div class="col-md-3">
-                                    <label for="com_name">คอมพิวเตอร์/อุปกรณ์</label>
-                                    <input type="text" id="fa_name" class="form-control" name="fa_name" required="" value="{{ $data->fa_name}}" readonly>
-                                </div>
-                                <div class="col-md-3">
-                                    <label for="repair_date">วันที่แจ้ง</label>
-                                    <input type="text" id="repair_date" class="form-control" name="repair_date" value="{{ \Carbon\Carbon::now()->format('d-m-Y')}}" readonly>
-                                </div>
-                                <div class="col-md-6">
-                                    <label for="fa_user">ผู้แจ้งซ่อม</label>
-                                    <input type="text" id="fa_user" class="form-control" name="fa_user"  value="{{ $data->fa_user}}" >
-                                </div>
-
-                               </div>
                                <br/>
-                               <div class="row">
-                                @foreach ($problems as $problem)
+                               <div class="row ">
 
-                                <div class="col-md-4 col-sm-4  profile_details">
-                                    <form id="{{ $problem->problem_uuid }}" name="{{ $problem->problem_uuid }}" action="{{ route('fa.save')}}" data-parsley-validate enctype="multipart/form-data" method="POST">
+
+                                <div class="col align-self-start profile_details" >
+                                    <form id="frm_repaire" name="frm_repaire" action="{{ route('ac.repaire')}}" data-parsley-validate enctype="multipart/form-data" method="POST">
                                         @csrf
-                                        <input type="hidden" id="problem_uuid"  value="{{ $problem->problem_uuid }}">
-                                        <input type="hidden" id="score_{{ $problem->problem_uuid }}"  value="1">
+
                                         <input type="hidden" id="fa_uuid" class="form-control" name="fa_uuid" value="{{ $data->fa_uuid}}" >
-                                        <input type="hidden" id="repair_problem_{{ $problem->problem_uuid}}" class="form-control" name="repair_problem_{{ $problem->problem_uuid}}" value="{{ $problem->problem_name}}" >
+
                                     <div class="well profile_view">
                                       <div class="col-sm-12">
-                                        <h4 class="brief text-center alert"><i>แจ้งปัญหาการใช้งาน</i></h4>
+
                                         <div class="right col-sm-5 text-center">
                                             <img src="/img/question.png" alt="" width="80px" class="img-circle img-fluid">
                                           </div>
                                         <div class="left col-sm-7">
-                                          <h2 class="text-danger">{{ $problem->problem_name }}</h2>
+                                          <h2 class="text-primary"> แจ้งปัญหาการใช้งาน</h2>
                                         </div>
 
                                       </div>
                                       <div class=" bottom text-center">
-                                        <div class=" col-sm-12 emphasis">
-                                          <p class="ratings">
-                                            <a>ระดับเร่งด่วน</a><br/>
 
-                                            <a href="javascript:void(0)" onclick="setscore('{{ $problem->problem_uuid }}','1')"><span class="fa fa-star fa-2x star_{{ $problem->problem_uuid }}_1"></span> ปกติ</a>
-                                            <a href="javascript:void(0)" onclick="setscore('{{ $problem->problem_uuid }}','2')"><span class="fa fa-star-o fa-2x  star_{{ $problem->problem_uuid }}_2"> </span>ด่วน</a>
-                                            <a href="javascript:void(0)" onclick="setscore('{{ $problem->problem_uuid }}','3')"><span class="fa fa-star-o fa-2x  star_{{ $problem->problem_uuid }}_3"> </span>ด่วนที่สุด</a>
-
-                                          </p>
-                                        </div>
                                         <div class=" col-sm-12 emphasis">
 
-                                          <button type="button" class="btn btn-success btn-sm btn-block btn-save" data-problem_uuid="{{ $problem->problem_uuid }}">
+                                          <button type="submit" class="btn btn-dark btn-sm btn-block " data-problem_uuid="">
                                             <i class="fa fa-bell-o"> </i> แจ้งปัญหา
                                           </button>
                                         </div>
                                       </div>
                                     </div>
                                 </form>
-                                  </div>
-                                @endforeach
+                                </div>
+
+                                <div class="col align-self-center  profile_details">
+                                    <form id="frm_pm" name="frm_pm" action="{{ route('fa.save')}}" data-parsley-validate enctype="multipart/form-data" method="POST">
+                                        @csrf
+
+                                        <input type="hidden" id="fa_uuid" class="form-control" name="fa_uuid" value="{{ $data->fa_uuid}}" >
+
+                                    <div class="well profile_view">
+                                      <div class="col-sm-12">
+
+                                        <div class="right col-sm-5 text-center">
+                                            <img src="/img/pm.png" alt="" width="80px" class="img-circle img-fluid">
+                                          </div>
+                                        <div class="left col-sm-7">
+                                          <h2 class="text-primary">แผนซ่อมบำรุงรักษา  </h2>
+                                        </div>
+
+                                      </div>
+                                      <div class=" bottom text-center">
+
+                                        <div class=" col-sm-12 emphasis">
+
+                                          <button type="button" class="btn btn-warning btn-sm btn-block " data-problem_uuid="">
+                                            <i class="fa fa-bell-o"> </i> แจ้งปัญหา
+                                          </button>
+                                        </div>
+                                      </div>
+                                    </div>
+                                </form>
+                                </div>
+
+                                <div class="col align-self-end  profile_details" ">
+                                    <form id="frm_report" name="frm_report" action="" data-parsley-validate enctype="multipart/form-data" method="POST">
+                                        @csrf
+
+                                        <input type="hidden" id="fa_uuid" class="form-control" name="fa_uuid" value="{{ $data->fa_uuid}}" >
+
+                                    <div class="well profile_view">
+                                      <div class="col-sm-12">
+
+                                        <div class="right col-sm-5   col-md-5 text-center">
+                                            <img src="/img/report.png" alt="" width="80px" class="img-circle img-fluid">
+                                          </div>
+                                        <div class="left col-sm-7 col-md-7">
+                                          <h2 class="text-primary">ประวัติการซ่อมบำรุงรักษา </h2>
+                                        </div>
+
+                                      </div>
+                                      <div class=" bottom text-center">
+
+                                        <div class=" col-sm-12 emphasis">
+
+
+                                          <button type="button" class="btn btn-info btn-sm btn-block " data-problem_uuid="">
+                                            <i class="fa fa-bell-o"> </i> แจ้งปัญหา
+                                          </button>
+                                        </div>
+                                      </div>
+                                    </div>
+                                </form>
+                                </div>
 
                                </div>
 
@@ -247,7 +280,7 @@ $(document).on("click", '.btn-save', function(e) {
 
 
                 }).then(() => {
-                    location.href='/repairs/success?fa_uuid'+data.fa_uuid
+                    location.href='/repairs/success'
                 })
 
 

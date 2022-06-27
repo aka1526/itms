@@ -5,6 +5,7 @@ use App\Http\Controllers\FixassetController;
 use App\Http\Controllers\RepairsController;
 use App\Http\Controllers\ProblemsController;
 use App\Http\Controllers\PeriodsController;
+use App\Http\Controllers\ActionController;
 
 Route::controller(FixassetController::class)->group(function(){
     Route::get('/','index');
@@ -19,11 +20,17 @@ Route::controller(FixassetController::class)->group(function(){
     // Route::post('base/mctype/upstatus','upstatus')->name('base.mctype.upstatus');;
 
 });
+Route::controller(ActionController::class)->group(function(){
+    Route::get('actions/act/{uuid}','act')->name('ac.act');
+    Route::post('actions/repaire','repaire')->name('ac.repaire');
 
+
+});
 
 Route::controller(RepairsController::class)->group(function(){
 
     Route::match(array('get', 'post'),'/repairs','index')->name('re.index');
+
     Route::get('repairs/add/{uuid}','add')->name('re.add');
     Route::get('repairs/online/{uuid}','online')->name('re.online');
     Route::get('repairs/success','success')->name('re.success');

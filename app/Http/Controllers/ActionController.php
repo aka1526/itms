@@ -12,11 +12,11 @@ use App\Models\Fixasset;
 use App\Models\Repairs;
 use App\Models\Problems;
 
-class RepairsController extends Controller
+class ActionController extends Controller
 {
     protected $paging = 10;
 
-    public function online(Request $request,$uuid){
+    public function act(Request $request,$uuid){
 
         $data =Fixasset::where('fa_uuid','=',$uuid)->first();
         $group= $data->fa_type;
@@ -27,7 +27,7 @@ class RepairsController extends Controller
         }
 
         if($data){
-            return view('repairs.online',compact('data','problems'));
+            return view('actions.act',compact('data','problems','uuid'));
         }
 
         $data['title'] = '404';
@@ -35,6 +35,19 @@ class RepairsController extends Controller
         return response()->view('errors.404',compact('data'),404);
 
     }
+
+    public function repaire(Request $request){
+
+        $uuid=$request->fa_uuid;
+
+        return Redirect::to('repairs/online/'.$uuid);
+
+
+    }
+
+
+
+
 
     public function add(Request $request,$uuid){
 
@@ -128,7 +141,7 @@ class RepairsController extends Controller
             $icon="error";
             $title="เกิดข้อผิลพลาด";
         }
-     return response()->json([ 'act' => $act,'icon'=> $icon,'title'=>$title,'fa_uuid'=>$fa_uuid],200, array('Content-Type' => 'application/json;charset=utf8'), JSON_UNESCAPED_UNICODE);
+     return response()->json([ 'act' => $act,'icon'=> $icon,'title'=>$title],200, array('Content-Type' => 'application/json;charset=utf8'), JSON_UNESCAPED_UNICODE);
 
     }
 
