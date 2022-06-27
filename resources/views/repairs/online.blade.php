@@ -244,10 +244,10 @@ $(document).on("click", '.btn-save', function(e) {
                 Swal.fire({
                 icon: data.icon,
                 title: data.title,
-
+                timer:1200,
 
                 }).then(() => {
-                    location.href='/repairs/success?fa_uuid'+data.fa_uuid
+                    location.href='/repairs/success?fa_uuid='+data.fa_uuid
                 })
 
 

@@ -37,7 +37,7 @@
               <p>หากต้องการข้อมูลเพิ่มเติมกรุณาติดต่อ คุณเอกชัย 0898918431.
 
               </p>
-              <div class="text-center"><a href="/actions/act/"{{$fa_uuid}}> </a></div>
+              <div class="text-center"><a class="btn btn-primary" href="/actions/act/{{ Request::get('fa_uuid') }}"> <i class="fa fa-arrow-left"></i> กลับ</a></div>
             </div>
           </div>
         </div>
