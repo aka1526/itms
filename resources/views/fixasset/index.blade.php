@@ -150,6 +150,7 @@
                                                 <div class="dropdown-menu">
                                                     <a class="dropdown-item" href="{{route('re.add', $row->fa_uuid)}}"><i class="fa fa-pencil-square"></i> แจ้งซ่อม</a>
                                                     <a class="dropdown-item" href="{{route('fa.edit', $row->fa_uuid)}}"><i class="fa fa-pencil-square"></i> แก้ไขข้อมูล</a>
+                                                    <a class="dropdown-item" href="{{route('ac.act', $row->fa_uuid)}}"><i class="fa fa-pencil-square"></i> ระบบ แจ้งซ่อม Online</a>
 
 
                                                     <a class="dropdown-item text-danger btn-delete" href="" data-fa_uuid="{{$row->fa_uuid}}"><i class="fa fa-trash"></i> <strong>ลบข้อมูล</strong></a>
