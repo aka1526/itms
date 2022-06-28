@@ -216,6 +216,10 @@ class ActionController extends Controller
                     , 'modify_time'=>$modify_time
                 ]);
 
+                Fixasset::where('fa_uuid','=',$fa->fa_uuid)->update([
+                    'pm_last_date' =>Carbon::now()
+                    ,'pm_next_date'=>$pm_date
+                ]);
 
             }
 

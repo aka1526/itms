@@ -47,16 +47,18 @@
                   <div class="x_panel">
 
                         <div class="x_content">
-                            <h2 class="btn-success alert" align="center">แจ้งซ่อม/แผนบำรุงรํกษา/รายงาน คอมพิวเตอร์และอุปกรณ์::  {{ $data->fa_name}}</h2>
-
-
+                            <div class="row ">
+                            <div class="col-md-12 col-sm-12">
+                            <h4 class="btn-success alert " align="center">แจ้งซ่อมคอมพิวเตอร์:{{ $data->fa_name}}</h4>
+                        </div>
+                            </div>
                             <!-- start form for validation -->
 
                                <br/>
                                <div class="row ">
 
 
-                                <div class="col align-self-start profile_details" >
+                                <div class="col-md-4 col-sm-4 profile_details" >
                                     <form id="frm_repaire" name="frm_repaire" action="{{ route('ac.repaire')}}" data-parsley-validate enctype="multipart/form-data" method="POST">
                                         @csrf
 
@@ -86,7 +88,7 @@
                                 </form>
                                 </div>
 
-                                <div class="col align-self-center  profile_details">
+                                <div class="col-md-4 col-sm-4  profile_details">
                                     <form id="frm_pm" name="frm_pm" action="{{ route('ac.pm')}}" data-parsley-validate enctype="multipart/form-data" method="POST">
                                         @csrf
 
@@ -116,7 +118,7 @@
                                 </form>
                                 </div>
 
-                                <div class="col align-self-end  profile_details" ">
+                                <div class="col-md-4 col-sm-4  profile_details" ">
                                     <form id="frm_report" name="frm_report" action="{{route('ac.report')}}" data-parsley-validate enctype="multipart/form-data" method="POST">
                                         @csrf
 
