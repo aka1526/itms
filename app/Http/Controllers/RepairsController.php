@@ -131,7 +131,7 @@ class RepairsController extends Controller
         if( $act){
                 $icon="success";
                 $title="บันทึกผลสำเสร็จ";
-                Line::send("\n".'เครื่องคอม ::'.$fa_name."\n".' แจ้งซ่อมอาการ'.$repair_problem ."\n".' ระดับความเร่งด่วน : '.$repair_priority ."\n".' Tel:'. $fa_tel);
+                Line::send("\n".'เครื่องคอม : '.$fa_name."\n".' แจ้งซ่อมอาการ: '.$repair_problem ."\n".' ระดับความเร่งด่วน : '.$repair_priority ."\n".' Tel:'. $fa_tel);
         } else {
             $icon="error";
             $title="เกิดข้อผิลพลาด";
