@@ -13,6 +13,7 @@ use App\Models\Repairs;
 use App\Models\Problems;
 use App\Models\Historys;
 
+use Phattarachai\LineNotify\Facade\Line;
 
 class RepairsController extends Controller
 {
@@ -21,6 +22,7 @@ class RepairsController extends Controller
     public function online(Request $request,$uuid){
 
         $data =Fixasset::where('fa_uuid','=',$uuid)->first();
+        $fa_tel  =$data->fa_tel;
         $group= $data->fa_type;
         if( $group=="PC" ||  $group=="NOTEBOOK"){
             $problems =Problems::where('group','=','COMPUTER')->orderBy('problem_name')->get();
@@ -29,6 +31,8 @@ class RepairsController extends Controller
         }
 
         if($data){
+
+            Line::send("\n".'เครื่องคอม ::'.$data->fa_name ."\n".'กำลังแจ้งซ่อม '."\n".'เบอร์โทร:'. $fa_tel );
             return view('repairs.online',compact('data','problems'));
         }
 
@@ -76,6 +80,8 @@ class RepairsController extends Controller
         $problems =Problems::where('problem_uuid','=',$problem_uuid)->first();
         $problems_code =$problems->problem_code;
 
+        $fa =Fixasset::where('fa_uuid','=',$fa_uuid)->first();
+        $fa_tel  =$fa->fa_tel;
         $act=false;
 
         $create_by ='admin';
@@ -125,7 +131,7 @@ class RepairsController extends Controller
         if( $act){
                 $icon="success";
                 $title="บันทึกผลสำเสร็จ";
-
+                Line::send("\n".'เครื่องคอม ::'.$fa_name."\n".' แจ้งซ่อมอาการ'.$repair_problem ."\n".' ระดับความเร่งด่วน : '.$repair_priority ."\n".' Tel:'. $fa_tel);
         } else {
             $icon="error";
             $title="เกิดข้อผิลพลาด";
