@@ -31,8 +31,8 @@ class RepairsController extends Controller
         }
 
         if($data){
-            Line::send('ทดสอบส่งข้อความ');
-          //  Line::send("\n".'เครื่องคอม ::'.$data->fa_name ."\n".'กำลังแจ้งซ่อม '."\n".'เบอร์โทร:'. $fa_tel );
+           // Line::send('ทดสอบส่งข้อความ');
+           Line::send("\n".'เครื่องคอม ::'.$data->fa_name ."\n".'กำลังแจ้งซ่อม '."\n".'เบอร์โทร:'. $fa_tel );
             return view('repairs.online',compact('data','problems'));
         }
 
