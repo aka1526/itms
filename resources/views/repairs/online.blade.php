@@ -78,15 +78,15 @@
                                         <input type="hidden" id="score_{{ $problem->problem_uuid }}"  value="1">
                                         <input type="hidden" id="fa_uuid" class="form-control" name="fa_uuid" value="{{ $data->fa_uuid}}" >
                                         <input type="hidden" id="repair_problem_{{ $problem->problem_uuid}}" class="form-control" name="repair_problem_{{ $problem->problem_uuid}}" value="{{ $problem->problem_name}}" >
-                                    <div class="well profile_view">
+                                    <div class="well profile_view" style="background:#2C3E50 ;color:#ffffff;box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.5), 0 0 10px #D5DBDB ">
                                       <div class="col-sm-12">
-                                        <h4 class="brief text-center alert"><i>แจ้งปัญหาการใช้งาน</i></h4>
-                                        <div class="right col-sm-5 text-center">
+                                        <h4 class="  text-center  "><i>แจ้งซ่อม-ปัญหาการใช้งาน</i></h4>
+                                        <div class="  text-center">
                                             <img src="/img/question.png" alt="" width="80px" class="img-circle img-fluid">
                                           </div>
-                                        <div class="left col-sm-7">
+                                        {{-- <div class="left col-sm-7">
                                           <h2 class="text-danger">{{ $problem->problem_name }}</h2>
-                                        </div>
+                                        </div> --}}
 
                                       </div>
                                       <div class=" bottom text-center">
@@ -102,8 +102,8 @@
                                         </div>
                                         <div class=" col-sm-12 emphasis">
 
-                                          <button type="button" class="btn btn-success btn-sm btn-block btn-save" data-problem_uuid="{{ $problem->problem_uuid }}">
-                                            <i class="fa fa-bell-o"> </i> แจ้งปัญหา
+                                          <button type="button" class="btn btn-info btn-sm btn-block btn-save" data-problem_uuid="{{ $problem->problem_uuid }}">
+                                            <i class="fa fa-bell-o"> </i> แจ้งปัญหา{{ $problem->problem_name }}
                                           </button>
                                         </div>
                                       </div>
