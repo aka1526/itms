@@ -24,7 +24,7 @@ class ProblemsController extends Controller
                 return $query->where('problem_name','like', '%'.$search.'%');
             }
         })
-        ->orderBy('group')->orderBy('problem_name')->paginate($this->paging);
+        ->orderBy('group')->orderBy('problem_code')->paginate($this->paging);
         return view('problems.index',compact('dataset','search'));
 
     }
@@ -93,7 +93,6 @@ class ProblemsController extends Controller
             ,'problem_name'=> $problem_name
             ,'group'=> $group
             ,'problems_status'=> $problems_status
-
            ,'modify_by'=> $modify_by
            ,'modify_time'=> $modify_time
         ]);
