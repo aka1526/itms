@@ -81,7 +81,7 @@
                                         <input type="hidden" id="repair_problem_{{ $problem->problem_uuid}}" class="form-control" name="repair_problem_{{ $problem->problem_uuid}}" value="{{ $problem->problem_name}}" >
                                     <div class="well profile_view" style="background:#2C3E50 ;color:#ffffff;box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.5), 0 0 10px #D5DBDB ">
                                       <div class="col-sm-12">
-                                        <h4 class="  text-center  "><i>แจ้งซ่อม-ปัญหาการใช้งาน</i></h4>
+                                        <h4 class="  text-center  "><i>แจ้งซ่อม-ปัญหา {{  $problem->group  }}</i></h4>
                                         <div class="  text-center">
                                             <img src="/img/question.png" alt="" width="80px" class="img-circle img-fluid">
                                           </div>
@@ -241,7 +241,7 @@ $(document).on("click", '.btn-save', function(e) {
             processData: false,
             contentType: false,
             success: function(data){
-
+                
                 Swal.fire({
                 icon: data.icon,
                 title: data.title,
