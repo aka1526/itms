@@ -83,7 +83,7 @@
                                       <div class="col-sm-12">
                                         <h4 class="  text-center  "><i>แจ้งซ่อม-ปัญหา {{  $problem->group  }}</i></h4>
                                         <div class="  text-center">
-                                            <img src="/img/question.png" alt="" width="80px" class="img-circle img-fluid">
+                                            <img src="/img/{{ strtolower( $problem->group)}}.png" alt="" width="120px" class="img img-fluid">
                                           </div>
                                         {{-- <div class="left col-sm-7">
                                           <h2 class="text-danger">{{ $problem->problem_name }}</h2>
@@ -241,7 +241,7 @@ $(document).on("click", '.btn-save', function(e) {
             processData: false,
             contentType: false,
             success: function(data){
-                
+
                 Swal.fire({
                 icon: data.icon,
                 title: data.title,
