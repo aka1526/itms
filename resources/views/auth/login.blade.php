@@ -36,10 +36,10 @@
 
               <h1>Login Form</h1>
               <div>
-                <input type="email" class="form-control" placeholder="email" required="" />
+                <input type="email" class="form-control" id="email" name="email" placeholder="email" required="" />
               </div>
               <div>
-                <input type="password" class="form-control" placeholder="password" required="" />
+                <input type="password" class="form-control" id="password" name="password" placeholder="password" required="" />
               </div>
               <div>
 
