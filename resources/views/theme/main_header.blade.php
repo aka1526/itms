@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>@yield('title','แจ้งซ่อมคอมพิวเตอร์/อุปกรณ์ Online')</title>
+    <title>@yield('title','ITMS::แจ้งซ่อมคอมพิวเตอร์/อุปกรณ์ Online')</title>
 
     <!-- Bootstrap -->
     <link href="/asset/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
