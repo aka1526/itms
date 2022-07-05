@@ -1,14 +1,13 @@
 <?php
-
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ActionController;
 use App\Http\Controllers\ChecklistsController;
 use App\Http\Controllers\FixassetController;
 use App\Http\Controllers\PeriodsController;
 use App\Http\Controllers\ProblemsController;
 use App\Http\Controllers\RepairsController;
-use Illuminate\Support\Facades\Route;
-
-
+use App\Http\Controllers\Members\ProfileController;
+use App\Http\Controllers\Members\ChangePasswordController;
 
 
 Route::controller(RepairsController::class)->group(function () {
@@ -32,10 +31,26 @@ Route::middleware(['auth'])->group(function () {
         return view('dashboard');
     })->middleware(['auth'])->name('dashboard');
 
+    Route::controller(ProfileController::class)->group(function () {
+        Route::get('/profile/edit', 'edit')->name('profile.edit');
+        Route::post('/profile/update', 'update')->name('profile.update');
+
+    });
+
+    Route::controller(ChangePasswordController::class)->group(function () {
+        Route::get('/profile/pwd/edit', 'edit')
+            ->name('pwd.edit');
+        Route::post('/profile/pwd/update', 'update')
+            ->name('pwd.update');
+
+    });
+
     Route::controller(FixassetController::class)->group(function () {
         Route::get('/', 'index');
-        Route::get('fixasset', 'index')->name('fa.index');
-        Route::get('fixasset/add', 'add')->name('fa.add');
+        Route::get('fixasset', 'index')
+            ->name('fa.index');
+        Route::get('fixasset/add', 'add')
+            ->name('fa.add');
         Route::post('fixasset/save', 'save')->name('fa.save');
         Route::get('fixasset/edit/{UNID}', 'edit')->name('fa.edit');
         Route::post('fixasset/update', 'update')->name('fa.update');

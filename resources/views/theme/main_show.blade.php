@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
   <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<!-- Meta, title, CSS, favicons, etc. -->
@@ -10,9 +9,6 @@
     <meta name="_token" content="{{{ csrf_token() }}}"/>
 	<title>@yield('title','แจ้งซ่อมคอมพิวเตอร์/อุปกรณ์ Online')</title>
     @yield('herder_jscss')
-<style>
-
-</style>
 </head>
 
 <body class="nav">
