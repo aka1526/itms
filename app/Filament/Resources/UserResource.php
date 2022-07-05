@@ -19,9 +19,11 @@ use Livewire\Component;
 
 class UserResource extends Resource
 {
+
+
     protected static ?string $model = User::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-collection';
+    protected static ?string $navigationIcon = 'heroicon-o-user';
 
     public static function form(Form $form): Form
     {
@@ -56,8 +58,7 @@ class UserResource extends Resource
                 Tables\Columns\TextColumn::make('name')
                     ->searchable()->sortable(),
                 Tables\Columns\TextColumn::make('email')->searchable()->sortable(),
-                Tables\Columns\TextColumn::make('email_verified_at')
-                    ->dateTime()->sortable(),
+                Tables\Columns\BooleanColumn::make('email_verified_at')->sortable(),
                 Tables\Columns\TextColumn::make('created_at')->sortable()
                     ->dateTime()->sortable(),
                 Tables\Columns\TextColumn::make('updated_at')
