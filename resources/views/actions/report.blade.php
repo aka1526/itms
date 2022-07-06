@@ -40,14 +40,14 @@
 
                     <div class="x_panel">
                         <div class="x_title">
-                            <h2 align="center">ดำเนินการตรวจเช็คตามแผน </h2>
+                            <h2 align="center">รายงานประวัติการซ่อม-บำรุงรักษา :: {{ $data[0]->fa_name }} </h2>
                             <div class="clearfix"></div>
                         </div>
                         <div class="x_content">
 
                                <div class="row">
                                 <div class="col-md-12 col-sm-12">
-                                    <table class="table table-striped  table-bordered jambo_table bulk_action">
+                                    <table class="table table-striped table-bordered jambo_table bulk_action">
                                         <thead>
                                             <tr>
                                                 <td >ลำดับ</td>
@@ -64,7 +64,7 @@
                                         </thead>
                                      @foreach ($data as $key => $item)
                                      <tr>
-                                          <td class=" "> {{ $data->firstItem() + $key }}</td>
+                                          <td class=""> {{ $data->firstItem() + $key }}</td>
                                         <td>{{ \Carbon\Carbon::parse($item->ref_date )->format('d-m-Y');}}</td>
                                         <td>{{ $item->ref_docno}}</td>
                                         <td class="text-center">{{ $item->data_type}}</td>
