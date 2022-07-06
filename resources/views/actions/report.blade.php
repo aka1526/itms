@@ -54,7 +54,8 @@
                                                 <td >วันที่</td>
                                                 <td >เอกสาร</td>
                                                 <td >ประเภทงาน</td>
-                                                <td >อาการ/รายการ</td>
+                                                <td >อาการ/ปัญหา</td>
+                                                <td >สาเหตุ</td>
                                                 <td >การแก้ไข</td>
                                                 <td >ค่าใช้จ่าย</td>
                                                 <td >ผู้ดำเนินการ</td>
@@ -69,6 +70,7 @@
                                         <td>{{ $item->ref_docno}}</td>
                                         <td class="text-center">{{ $item->data_type}}</td>
                                         <td>{{ $item->data_problem}}</td>
+                                        <td>{{ $item->data_cause}}</td>
                                         <td>{{ $item->data_solution}}</td>
 
                                         <td class="text-right">{{ number_format($item->data_costs,0)}}</td>
