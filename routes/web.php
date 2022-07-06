@@ -24,6 +24,20 @@ Route::controller(RepairsController::class)->group(function () {
     Route::post('repairs/save_req', 'save_req')->name('re.save_req');
 });
 
+Route::controller(ActionController::class)->group(function () {
+    Route::get('actions/act/{uuid}', 'act')->name('ac.act');
+    Route::post('actions/repaire', 'repaire')->name('ac.repaire');
+
+    Route::post('actions/pm', 'pm')->name('ac.pm');
+    Route::post('actions/pm/savepm', 'savepm')->name('ac.savepm');
+    Route::get('actions/pm/plan/{uuid}', 'pmplan')->name('ac.pmplan');
+    Route::post('actions/pm/plan/save', 'pmplansave')->name('ac.pmplansave');
+    Route::get('actions/pm/result/{uuid}', 'pmresult')->name('ac.pmresult');
+
+    Route::post('actions/report', 'report')->name('ac.report');
+});
+
+
 
 Route::middleware(['auth'])->group(function () {
 
@@ -60,18 +74,6 @@ Route::middleware(['auth'])->group(function () {
 
     });
 
-    Route::controller(ActionController::class)->group(function () {
-        Route::get('actions/act/{uuid}', 'act')->name('ac.act');
-        Route::post('actions/repaire', 'repaire')->name('ac.repaire');
-
-        Route::post('actions/pm', 'pm')->name('ac.pm');
-        Route::post('actions/pm/savepm', 'savepm')->name('ac.savepm');
-        Route::get('actions/pm/plan/{uuid}', 'pmplan')->name('ac.pmplan');
-        Route::post('actions/pm/plan/save', 'pmplansave')->name('ac.pmplansave');
-        Route::get('actions/pm/result/{uuid}', 'pmresult')->name('ac.pmresult');
-
-        Route::post('actions/report', 'report')->name('ac.report');
-    });
 
 
     Route::controller(ProblemsController::class)->group(function () {
