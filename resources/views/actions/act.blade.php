@@ -67,7 +67,7 @@
                                     <div class="well profile_view">
                                       <div class="col-sm-12">
 
-                                        <div class="right col-sm-5 text-center">
+                                        <div class="text-center right col-sm-5">
                                             <img src="/img/question.png" alt="" width="80px" class="img-circle img-fluid">
                                           </div>
                                         <div class="left col-sm-7">
@@ -75,7 +75,7 @@
                                         </div>
 
                                       </div>
-                                      <div class=" bottom text-center">
+                                      <div class="text-center bottom">
 
                                         <div class=" col-sm-12 emphasis">
 
@@ -88,7 +88,7 @@
                                 </form>
                                 </div>
 
-                                <div class="col-md-4 col-sm-4  profile_details">
+                                <div class="col-md-4 col-sm-4 profile_details">
                                     <form id="frm_pm" name="frm_pm" action="{{ route('ac.pm')}}" data-parsley-validate enctype="multipart/form-data" method="POST">
                                         @csrf
 
@@ -97,7 +97,7 @@
                                     <div class="well profile_view">
                                       <div class="col-sm-12">
 
-                                        <div class="right col-sm-5 text-center">
+                                        <div class="text-center right col-sm-5">
                                             <img src="/img/pm.png" alt="" width="80px" class="img-circle img-fluid">
                                           </div>
                                         <div class="left col-sm-7">
@@ -105,7 +105,7 @@
                                         </div>
 
                                       </div>
-                                      <div class=" bottom text-center">
+                                      <div class="text-center bottom">
 
                                         <div class=" col-sm-12 emphasis">
 
@@ -118,7 +118,7 @@
                                 </form>
                                 </div>
 
-                                <div class="col-md-4 col-sm-4  profile_details" ">
+                                <div class="col-md-4 col-sm-4 profile_details" ">
                                     <form id="frm_report" name="frm_report" action="{{route('ac.report')}}" data-parsley-validate enctype="multipart/form-data" method="POST">
                                         @csrf
 
@@ -127,7 +127,7 @@
                                     <div class="well profile_view">
                                       <div class="col-sm-12">
 
-                                        <div class="right col-sm-5   col-md-5 text-center">
+                                        <div class="text-center right col-sm-5 col-md-5">
                                             <img src="/img/report.png" alt="" width="80px" class="img-circle img-fluid">
                                           </div>
                                         <div class="left col-sm-7 col-md-7">
@@ -135,13 +135,13 @@
                                         </div>
 
                                       </div>
-                                      <div class=" bottom text-center">
+                                      <div class="text-center bottom">
 
                                         <div class=" col-sm-12 emphasis">
 
 
                                           <button type="submit" class="btn btn-info btn-sm btn-block " data-problem_uuid="">
-                                            <i class="fa fa-bell-o"> </i> แจ้งปัญหา
+                                            <i class="fa fa-print"> </i> รายงานประวัติการซ่อม-บำรุงรักษา
                                           </button>
                                         </div>
                                       </div>
