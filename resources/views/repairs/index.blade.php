@@ -91,7 +91,7 @@
                                       <th class="column-title">ลำดับ </th>
                                       <th class="column-title">วันที่</th>
                                       <th class="column-title">เอกสาร</th>
-                                      <th class="column-title">Computer/อุปกรณ์</th>
+                                      <th class="column-title">ชื่ออุปกรณ์</th>
                                       <th class="column-title">ชื่อผู้แจ้ง</th>
                                       <th class="column-title">ปัญหา/งานซ่อม </th>
                                       <th class="column-title">สาเหตุ </th>
