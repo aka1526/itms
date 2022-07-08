@@ -116,6 +116,7 @@
                                         <td class=" "> {{ $row->fa_name }}</td>
                                         <td class=" ">  {{ $row->repair_user}}</td>
                                         <td class=" ">  {{ $row->repair_problem}}</td>
+                                        <td class=" ">  {{ $row->repair_cause}}</td>
                                         <td class=" ">  {{ $row->repair_solution}}</td>
                                         <td class=" "> {{ $row->repair_checkby }}</td>
 
