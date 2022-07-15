@@ -37,7 +37,21 @@
             <div class="clearfix"></div>
             <div class="row">
 
-                <div class="col-md-8 col-sm-8  ">
+                <div class="col-md-6 col-sm-6  ">
+                    <div class="x_panel">
+                      <div class="x_title">
+                        <h2>จำนวนคอมฯ<small>แยกตามแผนก</small></h2>
+
+                        <div class="clearfix"></div>
+                      </div>
+                      <div class="x_content">
+                        <canvas id="Fa_Chart"></canvas>
+                      </div>
+                    </div>
+                  </div>
+
+
+                <div class="col-md-6 col-sm-6  ">
                   <div class="x_panel">
                     <div class="x_title">
                       <h2>สถิติการแจ้งซ่อมคอมพิวเตอร์ <small>แยกรายเดือน</small></h2>
@@ -111,6 +125,32 @@ Chart.defaults.global.legend = {
 };
 
 
+if ($('#Fa_Chart').length) {
+
+var ctx = document.getElementById("Fa_Chart");
+var mybarChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels:  {!! json_encode($fa_label) !!},
+        datasets: [{
+            label: '# of Votes',
+            backgroundColor: "#26B99A",
+            data:  {!! json_encode($fa_data) !!},
+        } ]
+    },
+
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true
+                }
+            }]
+        }
+    }
+});
+
+}
 
 
 if ($('#repair_Chart').length) {
