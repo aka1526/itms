@@ -37,7 +37,7 @@
             <div class="clearfix"></div>
             <div class="row">
 
-                <div class="col-md-6 col-sm-6  ">
+                <div class="col-md-8 col-sm-8  ">
                   <div class="x_panel">
                     <div class="x_title">
                       <h2>สถิติการแจ้งซ่อมคอมพิวเตอร์ <small>แยกรายเดือน</small></h2>
