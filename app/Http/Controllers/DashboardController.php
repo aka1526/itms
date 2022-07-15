@@ -23,19 +23,21 @@ class DashboardController extends Controller
         ->where('repair_year','=',$_year)->groupBy('repair_year')
         ->groupBy('repair_month')->get();
         $tt=12;
-        $dataset=array();
+        $dataset= [];
         for($i = 1; $i<=$tt; $i++) {
                 foreach ($RepairsYear as $key => $value) {
                     if($i==$value->repair_month){
-                        $dataset[]=$value->Total;
+                        $dataset[]=($value->Total);
                     } else {
-                        $dataset[]=0;
+                        $dataset[]=(0);
                     }
 
                 }
            }
 
-        return view('dashboard.index',compact('dataset'));
+
+       //  $dataset=  json_encode($dataset,JSON_NUMERIC_CHECK);
+        return view('dashboard.index', compact('dataset'));
 
     }
 }

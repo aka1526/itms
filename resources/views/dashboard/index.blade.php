@@ -123,9 +123,7 @@ if ($('#repair_Chart').length) {
             datasets: [{
                 label: '# of Votes',
                 backgroundColor: "#26B99A",
-                data: ['{!! $dataset[0] !!}','{!! $dataset[1] !!}','{!! $dataset[2] !!}','{!! $dataset[3] !!}'
-                ,'{!! $dataset[4] !!}','{!! $dataset[5] !!}','{!! $dataset[6] !!}','{!! $dataset[7] !!}','{!! $dataset[8] !!}'
-                ,'{!! $dataset[9] !!}','{!! $dataset[10] !!}','{!! $dataset[11] !!}']
+                data:  {!! json_encode($dataset) !!},
             } ]
         },
 
