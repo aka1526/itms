@@ -148,13 +148,15 @@
                                                     @endif
 
 
+                                                    @if(isset(Auth::user()->name))
+                                                    <div class="dropdown-menu">
+                                                        <a class="dropdown-item btn-rec" href="javascript:void(0)" data-uuid="{{$row->repair_uuid}}"><i class="fa fa-power-off"></i> รับงานซ่อม</a>
+                                                        <a class="dropdown-item" href="{{route('re.editjob', $row->repair_uuid)}}" ><i class="fa fa-pencil-square"></i> บันทึกการซ่อม</a>
+                                                        <a class="dropdown-item text-danger btn-delete" href="javascript:void(0)" data-uuid="{{$row->repair_uuid}}"><i class="fa fa-trash"></i> <strong>ลบข้อมูล</strong></a>
 
-                                                <div class="dropdown-menu">
-                                                    <a class="dropdown-item btn-rec" href="javascript:void(0)" data-uuid="{{$row->repair_uuid}}"><i class="fa fa-power-off"></i> รับงานซ่อม</a>
-                                                    <a class="dropdown-item" href="{{route('re.editjob', $row->repair_uuid)}}" ><i class="fa fa-pencil-square"></i> บันทึกการซ่อม</a>
-                                                    <a class="dropdown-item text-danger btn-delete" href="javascript:void(0)" data-uuid="{{$row->repair_uuid}}"><i class="fa fa-trash"></i> <strong>ลบข้อมูล</strong></a>
+                                                    </div>
+                                                    @endif
 
-                                                </div>
                                               </div>
 
 
