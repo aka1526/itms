@@ -8,13 +8,16 @@
         <ul class=" navbar-right">
           <li class="nav-item dropdown open" style="padding-left: 15px;">
             <a href="javascript:;" class="user-profile dropdown-toggle" aria-haspopup="true" id="navbarDropdown" data-toggle="dropdown" aria-expanded="false">
-              <img src="/images/img.jpg" alt="">{{ Auth::user()->name }}</a>
+              <img src="/images/img.jpg" alt="">{{ isset(Auth::user()->name) ? Auth::user()->name : 'visitor' }}</a>
             <div class="dropdown-menu dropdown-usermenu pull-right" aria-labelledby="navbarDropdown">
+                @if(isset(Auth::user()->name))
                 <a class="dropdown-item"  href="{{route('profile.edit')}}"> Edit Profile</a>
                 <a class="dropdown-item"  href="{{route('pwd.edit')}}"> Change Password</a>
-                {{-- <a class="dropdown-item"  href="javascript:;"><span class="badge bg-red pull-right">50%</span><span>Settings</span></a>
-                <a class="dropdown-item"  href="javascript:;">Help</a> --}}
                 <a class="dropdown-item"  href="/logout"><i class="fa fa-sign-out pull-right"></i> Log Out</a>
+                @else
+                <a class="dropdown-item"  href="/login"><i class="fa fa-sign-out pull-right"></i> Log In</a>
+                @endif
+
             </div>
           </li>
 

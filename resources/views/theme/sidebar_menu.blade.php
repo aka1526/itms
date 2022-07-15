@@ -2,7 +2,7 @@
 
     <div class="menu_section">
         <ul class="nav side-menu">
-            <li><a  href="/dashboards"><i class="fa fa-bar-chart"></i>ข้อมูลคอมพิวเตอร์ </a>
+            <li><a  href="/dashboards"><i class="fa fa-bar-chart"></i>สถิติแจ้งซ่อม </a>
             </li>
         </ul>
       <h3>ตั้งค่าระบบพื้นฐาน</h3>
