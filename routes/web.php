@@ -8,7 +8,11 @@ use App\Http\Controllers\ProblemsController;
 use App\Http\Controllers\RepairsController;
 use App\Http\Controllers\Members\ProfileController;
 use App\Http\Controllers\Members\ChangePasswordController;
+use App\Http\Controllers\DashboardController;
 
+Route::controller(DashboardController::class)->group(function () {
+    Route::get('dashboards',  'index')->name('dashboard.index');
+});
 
 Route::controller(RepairsController::class)->group(function () {
 
