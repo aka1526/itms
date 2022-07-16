@@ -27,7 +27,7 @@
               <li class="page-item active"><a class="page-link is-current" aria-label="Goto page {{ $page }}">{{ $page }}</a></li>
               @else
               <li class="page-item ">
-                  <a href="{{ $url.( isset($search) ? '&search='. $search  : '' ).( isset($pm_year) ? '&pm_year='.$pm_year: '')}}" class="page-link" aria-label="Goto page {{ $page }}">{{ $page }}</a>
+                  <a href="{{ $url.( isset($search) ? '&search='. $search  : '' ).( isset($pm_year) ? '&pm_year='.$pm_year: '').( isset($pm_month) ? '&pm_month='.$pm_month : '') }}" class="page-link" aria-label="Goto page {{ $page }}">{{ $page }}</a>
             </li>
               @endif
             @endforeach
@@ -36,7 +36,7 @@
 
         {{-- Next Page Link --}}
         @if ($paginator->hasMorePages())
-        <li class="page-item text-primary"><a class="page-link" href="{{ $paginator->nextPageUrl().( isset($search) ? '&search='. $search  : '' ).( isset($pm_year) ? '&pm_year='.$pm_year: '') }}">Next Page</a></li>
+        <li class="page-item text-primary"><a class="page-link" href="{{ $paginator->nextPageUrl().( isset($search) ? '&search='. $search  : '' ).( isset($pm_year) ? '&pm_year='.$pm_year: '').( isset($pm_month) ? '&pm_month='.$pm_month : '') }}">Next Page</a></li>
         @else
         <li class="page-item "><a class="page-link" disabled>Next Page</a></li>
         @endif

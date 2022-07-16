@@ -71,19 +71,35 @@
                                         @csrf
                                         <div class="col-md-2 col-sm-2  ">
 
-                                        <label for="search">แผนประจำปี</label>
-                                        <div class="input-group mb-3">
-                                            <select class="form-control form-control-sm" id="pm_year" name="pm_year" >
-                                                <option>Choose..</option>
-                                                {{ $last= date('Y') }}
-                                                {{ $now = date('Y')+1 }}
+                                            <label for="search">แผนประจำปี</label>
+                                            <div class="input-group mb-3">
+                                                <select class="form-control form-control-sm" id="pm_year" name="pm_year" >
+                                                    <option>Choose..</option>
+                                                    {{ $last= date('Y') }}
+                                                    {{ $now = date('Y')+1 }}
 
-                                                @for ($i = $now; $i >= $last; $i--)
-                                                    <option value="{{ $i }}" {{ $i==$pm_year ? ' selected' :''  }}>{{ $i }}</option>
-                                                @endfor
-                                            </select>
+                                                    @for ($i = $now; $i >= $last; $i--)
+                                                        <option value="{{ $i }}" {{ $i==$pm_year ? ' selected' :''  }}>{{ $i }}</option>
+                                                    @endfor
+                                                </select>
+                                            </div>
                                         </div>
-                                    </div>
+                                        <div class="col-md-2 col-sm-2  ">
+
+                                            <label for="search">เดือน</label>
+                                            <div class="input-group mb-3">
+                                                <select class="form-control form-control-sm" id="pm_month" name="pm_month" >
+
+                                                    @php
+                                                    $months =  array("แสดงทั้งหมด","มกราคม","กุมภาพันธ์","มีนาคม","เมษายน","พฤษภาคม","มิถุนายน","กรกฎาคม","สิงหาคม","กันยายน","ตุลาคม","พฤศจิกายน","ธันวาคม");
+                                                    @endphp
+                                                    @foreach ($months as $key => $month)
+                                                           <option value="{{ $key}}" {{ $pm_month==$key ? ' selected' : '' }}> {{ $month}}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
+
                                     <div class="col-md-5 col-sm-5   ">
 
                                         <label for="search">Search</label>
@@ -156,6 +172,7 @@
 										[
 											'paginator' => $dataset,
                                             'pm_year' => isset($search) ? $pm_year : '',
+                                            'pm_month' => isset($search) ? $pm_month : '',
                                             'search' => isset($search) ? $search : '',
 											'link_limit' => $dataset->perPage()
 										]) }}

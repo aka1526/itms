@@ -21,6 +21,7 @@ class PmplansController extends Controller
     public function index(Request $request){
         $search =isset($request->search) ? $request->search : '';
         $pm_year=isset($request->pm_year) ? $request->pm_year : Carbon::now()->format('Y');
+        $pm_month=isset($request->pm_month) && $request->pm_month>0 ? $request->pm_month : 0;
 
         $dataset =Pmplans::where('pm_year','=',$pm_year)
         ->leftJoin("fixasset", "fixasset.fa_uuid", "=", "pmplans.fa_uuid")
@@ -38,8 +39,14 @@ class PmplansController extends Controller
                 return $query ;
             }
         })
+        ->where(function($query) use ($pm_month) {
+            if ($pm_month >0) {
+                $query->where('pm_month','=', $pm_month);
+                return $query ;
+            }
+        })
         ->orderBy('fa_sec')->orderBy('fa_name')->paginate($this->paging);
-        return view('pmplans.index',compact('dataset','search','pm_year'));
+        return view('pmplans.index',compact('dataset','search','pm_year','pm_month'));
 
     }
 

@@ -11,7 +11,7 @@
             <li><a><i class="fa fa-calendar"></i>ข้อมูลซ่อมบำรุงคอมพิวเตอร์<span class="fa fa-chevron-down"></span></a>
               <ul class="nav child_menu">
                 <li><a href="/pmplans">แผนซ่อมบำรุง</a></li>
-                <li><a href="/fixasset">ปฎิทินซ่อมบำรุง</a></li>
+                {{-- <li><a href="/fixasset">ปฎิทินซ่อมบำรุง</a></li> --}}
 
               </ul>
             </li>
