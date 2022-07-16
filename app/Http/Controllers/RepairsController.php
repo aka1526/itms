@@ -23,6 +23,7 @@ class RepairsController extends Controller
 
         $data =Fixasset::where('fa_uuid','=',$uuid)->first();
         $fa_tel  =$data->fa_tel;
+        $fa_user  =$data->fa_user;
         $group= $data->fa_type;
         if( $group=="PC" ||  $group=="NOTEBOOK"){
             $problems =Problems::where('group','=','COMPUTER')->orderBy('problem_name')->get();
@@ -32,7 +33,10 @@ class RepairsController extends Controller
 
         if($data){
            // Line::send('ทดสอบส่งข้อความ');
-           Line::send("\n".'เครื่องคอม ::'.$data->fa_name ."\n".'กำลังแจ้งซ่อม '."\n".'เบอร์โทร:'. $fa_tel );
+
+
+           Line::send("\n".'เครื่องคอม ::'.$data->fa_name ."\n".'กำลังแจ้งซ่อม '
+           ."\n".' ชื่อผุ้ใช้: '.$fa_user."\n".'เบอร์โทร:'. $fa_tel );
             return view('repairs.online',compact('data','problems'));
         }
 
