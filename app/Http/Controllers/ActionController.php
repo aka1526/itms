@@ -269,7 +269,9 @@ class ActionController extends Controller
 
     public function pmresult(Request $request,$uuid){
 
-        $pmlist=  Pmresults::where('plan_uuid','=',$uuid)->orderBy('ac_item')->get();
+        $pmlist=  Pmresults::where('plan_uuid','=',$uuid)
+        ->leftJoin("fixasset", "fixasset.fa_uuid", "=", "pmresults.fa_uuid")
+        ->orderBy('ac_item')->get();
         $uuid=$pmlist[0]->fa_uuid;
         $plan_uuid=$uuid;
         return view('actions.pmresult',compact('pmlist','uuid','plan_uuid'));

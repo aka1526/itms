@@ -9,6 +9,7 @@ use App\Http\Controllers\RepairsController;
 use App\Http\Controllers\Members\ProfileController;
 use App\Http\Controllers\Members\ChangePasswordController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\PmplansController;
 
 Route::controller(DashboardController::class)->group(function () {
     Route::get('dashboards',  'index')->name('dashboard.index');
@@ -32,11 +33,11 @@ Route::controller(ActionController::class)->group(function () {
     Route::get('actions/act/{uuid}', 'act')->name('ac.act');
     Route::post('actions/repaire', 'repaire')->name('ac.repaire');
 
-    Route::post('actions/pm', 'pm')->name('ac.pm');
-    Route::post('actions/pm/savepm', 'savepm')->name('ac.savepm');
-    Route::get('actions/pm/plan/{uuid}', 'pmplan')->name('ac.pmplan');
-    Route::post('actions/pm/plan/save', 'pmplansave')->name('ac.pmplansave');
-    Route::get('actions/pm/result/{uuid}', 'pmresult')->name('ac.pmresult');
+    // Route::post('actions/pm', 'pm')->name('ac.pm');
+    // Route::post('actions/pm/savepm', 'savepm')->name('ac.savepm');
+    // Route::get('actions/pm/plan/{uuid}', 'pmplan')->name('ac.pmplan');
+    // Route::post('actions/pm/plan/save', 'pmplansave')->name('ac.pmplansave');
+    // Route::get('actions/pm/result/{uuid}', 'pmresult')->name('ac.pmresult');
 
     Route::post('actions/report', 'report')->name('ac.report');
 });
@@ -44,10 +45,30 @@ Route::controller(ActionController::class)->group(function () {
 
 
 Route::middleware(['auth'])->group(function () {
-
+/*
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->middleware(['auth'])->name('dashboard');
+*/
+
+Route::controller(ActionController::class)->group(function () {
+
+    Route::post('actions/pm', 'pm')->name('ac.pm');
+    Route::post('actions/pm/savepm', 'savepm')->name('ac.savepm');
+    Route::get('actions/pm/plan/{uuid}', 'pmplan')->name('ac.pmplan');
+    Route::post('actions/pm/plan/save', 'pmplansave')->name('ac.pmplansave');
+    Route::get('actions/pm/result/{uuid}', 'pmresult')->name('ac.pmresult');
+});
+
+
+    Route::controller(PmplansController::class)->group(function () {
+        Route::match(array('get', 'post'),'/pmplans', 'index')->name('pmplans.index');
+        Route::get('/pmplans/add', 'add')->name('pmplans.add');
+        Route::get('/pmplans/edit/{uuid}', 'edit')->name('pmplans.edit');
+        Route::post('/pmplans/update', 'update')->name('pmplans.update');
+        Route::post('/pmplans/delete', 'delete')->name('pmplans.delete');
+
+    });
 
     Route::controller(ProfileController::class)->group(function () {
         Route::get('/profile/edit', 'edit')->name('profile.edit');

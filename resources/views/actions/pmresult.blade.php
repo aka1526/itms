@@ -40,13 +40,11 @@
 
                     <div class="x_panel">
                         <div class="x_title">
-                            <h2 align="center">ดำเนินการตรวจเช็คตามแผน </h2>
+                            <h2 align="center">ผลการตรวจเช็คคอมพิวเตอร์/อุปกรณ์ :: {{ $pmlist[0]->fa_name}} ผู้ใช้งาน : {{ $pmlist[0]->fa_user=='' ? '-' : $pmlist[0]->fa_user }} </h2>
                             <div class="clearfix"></div>
                         </div>
                         <div class="x_content">
-                            <form id="frm_pm" name="frm_pm" action="{{ route('ac.pmplansave')}}" data-parsley-validate enctype="multipart/form-data" method="POST">
-                                @csrf
-                                <input type="hidden" id="plan_uuid" class="form-control" name="plan_uuid" value="{{$plan_uuid}}" >
+
 
                                <div class="row">
                                 <div class="col-md-12 col-sm-12">
@@ -54,6 +52,7 @@
                                         <thead>
                                             <tr>
                                                 <td colspan="1" rowspan="2">ลำดับ</td>
+                                                <td colspan="1" rowspan="2">วันที่เช็ค</td>
                                                 <td colspan="1" rowspan="2">รายการ</td>
                                                 <td colspan="1" rowspan="2">วิธีการตรวจสอบ</td>
                                                 <td colspan="1" rowspan="2">มาตราฐาน</td>
@@ -69,18 +68,19 @@
                                      <tr>
 
                                         <td>{{ $item->ac_item}}</td>
+                                        <td>{{ \Carbon\Carbon::parse( $item->ac_date )->format('d-m-Y');}}</td>
                                         <td>{{ $item->ac_desc}}</td>
                                         <td>{{ $item->ac_method}}</td>
                                         <td>{{ $item->ac_std}}</td>
                                         <td class="text-center">
                                             @if($item->ac_result=="Y")
-                                            <i class="fa fa-check"></i>
+                                            <i class="fa fa-check" style="color:green;"></i>
 
                                             @endif
                                         </td>
                                         <td class="text-center">
                                             @if($item->ac_result=="N")
-                                            <i class="fa fa-close"></i>
+                                            <i class="fa fa-close" style="color:red;"></i>
                                             @endif
                                         </td>
 
@@ -93,11 +93,11 @@
 
                                </div>
                                 <br />
-
-                                <a href="/actions/act/{{$uuid}}"   class="btn btn-secondary"> <i class="fa fa-arrow-left"></i> กลับ </a>
-
-                            </form>
-
+                                @if(isset(Auth::user()->name))
+                                    <a href="/pmplans"   class="btn btn-secondary"> <i class="fa fa-arrow-left"></i> กลับ </a>
+                                @else
+                                    <a href="/actions/act/{{$uuid}}"   class="btn btn-secondary"> <i class="fa fa-arrow-left"></i> กลับ </a>
+                                @endif
 
                         </div>
                     </div>

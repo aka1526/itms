@@ -5,6 +5,17 @@
             <li><a  href="/dashboards"><i class="fa fa-bar-chart"></i>สถิติแจ้งซ่อม </a>
             </li>
         </ul>
+        @if(isset(Auth::user()->name))
+        <h3>ข้อมูลซ่อมบำรุง</h3>
+        <ul class="nav side-menu">
+            <li><a><i class="fa fa-calendar"></i>ข้อมูลซ่อมบำรุงคอมพิวเตอร์<span class="fa fa-chevron-down"></span></a>
+              <ul class="nav child_menu">
+                <li><a href="/pmplans">แผนซ่อมบำรุง</a></li>
+                <li><a href="/fixasset">ปฎิทินซ่อมบำรุง</a></li>
+
+              </ul>
+            </li>
+            </ul>
       <h3>ตั้งค่าระบบพื้นฐาน</h3>
       <ul class="nav side-menu">
         <li><a><i class="fa fa-desktop"></i>ข้อมูลคอมพิวเตอร์<span class="fa fa-chevron-down"></span></a>
@@ -17,6 +28,9 @@
           </ul>
         </li>
         </ul>
+        @endif
+
+
     </div>
 
   </div>
