@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Str;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 use App\Models\Fixasset;
 use App\Models\Repairs;
@@ -15,6 +16,7 @@ use App\Models\Pmplans;
 use App\Models\Pmresults;
 use App\Models\Checklists;
 use App\Models\Historys;
+use App\Models\Users;
 
 
 class ActionController extends Controller
@@ -176,11 +178,13 @@ class ActionController extends Controller
 
         if($act){
 
+      $currentuser = auth()->user();
 
          $newplan= Pmplans::where('pm_uuid','=',$plan_uuid)
             ->where('pm_status','!=','Y')->update([
                 'pm_act_date' =>Carbon::now()->format("Y-m-d")
                 ,'pm_status' =>"Y"
+                ,'pm_by' => $currentuser->name
             ]);
 
 

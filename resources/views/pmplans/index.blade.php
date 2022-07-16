@@ -111,7 +111,7 @@
                                       <th class="column-title">แผนก</th>
                                       <th class="column-title">วันที่ดำเนินการ</th>
                                       <th class="column-title">ผู้ดำเนินการ </th>
-                                      <th class="column-title">Edit </th>
+                                      <th class="column-title">View</th>
                                       <th class="column-title">Delete </th>
 
 
@@ -134,12 +134,11 @@
                                         <td class=" "> {{ $row->pm_act_date }}</td>
                                         <td class=" "> {{ $row->pm_by }}</td>
                                         @if($row->pm_status !='Y' )
-                                        <td class=" "> <a class="btn btn-sm" href="{{route('pmplans.edit', $row->pm_uuid)}}"><i class="fa fa-pencil-square fa-2x "  style="color:#26B99A;;"></i> </a></td>
+                                        <td class=" "> <a class="" href="{{route('pmplans.edit', $row->pm_uuid)}}" title="edit/แก้ไข"><i class="fa fa-pencil-square fa-2x" style="color:#1127e9e8" ></i> </a></td>
 
-                                        <td class=" "> <a class="btn btn-sm btn-delete" data-uuid="{{$row->pm_uuid}}" href=""><i class="fa fa-trash-o fa-2x " style="color:red;"></i> </a></td>
+                                        <td class=" "> <a class="" data-uuid="{{$row->pm_uuid}}" href=""><i class="fa fa-trash-o fa-2x " style="color:red;"></i> </a></td>
                                          @else
-                                         <td class=" "> <a class="btn btn-success btn-sm" href="/actions/pm/result/{{$row->pm_uuid}}"> </i><i class="fa fa-list-ol"></i> ผลการตรวจ</a></td>
-
+                                         <td class=" "> <a class="" href="/actions/pm/result/{{$row->pm_uuid}}" title="View/ดู"> <i class="fa fa-eye fa-2x" style="color:#d612ac"></i></a></td>
                                          <td class=" "> <i class="fa fa-check fa-2x" style="color:#26B99A"></i></td>
 
                                         @endif

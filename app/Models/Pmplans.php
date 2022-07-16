@@ -24,6 +24,7 @@ class Pmplans extends Model
         , 'fa_uuid'
         , 'pm_act_date'
         , 'pm_status'
+        , 'pm_by'
         , 'create_by'
         , 'create_time'
         , 'modify_by'

@@ -64,6 +64,7 @@ Route::controller(ActionController::class)->group(function () {
     Route::controller(PmplansController::class)->group(function () {
         Route::match(array('get', 'post'),'/pmplans', 'index')->name('pmplans.index');
         Route::get('/pmplans/add', 'add')->name('pmplans.add');
+        Route::post('/pmplans/new', 'new')->name('pmplans.new');
         Route::get('/pmplans/edit/{uuid}', 'edit')->name('pmplans.edit');
         Route::post('/pmplans/update', 'update')->name('pmplans.update');
         Route::post('/pmplans/delete', 'delete')->name('pmplans.delete');
