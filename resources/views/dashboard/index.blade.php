@@ -37,28 +37,32 @@
             <div class="row">
 
                 <div class="col-md-6 col-sm-6">
-                    <div class="x_panel">
-                        <div class="x_title">
-                            <h2>จำนวนคอมฯ<small>แยกตามแผนก</small></h2>
+                    <div class="card-box table-responsive">
+                        <div class="x_panel">
+                            <div class="x_title">
+                                <h2>จำนวนคอมฯ<small>แยกตามแผนก</small></h2>
 
-                            <div class="clearfix"></div>
-                        </div>
-                        <div class="x_content">
-                            <canvas id="Fa_Chart"></canvas>
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class="x_content">
+                                <canvas id="Fa_Chart"></canvas>
+                            </div>
                         </div>
                     </div>
                 </div>
 
 
                 <div class="col-md-6 col-sm-6">
-                    <div class="x_panel">
-                        <div class="x_title">
-                            <h2>สถิติการแจ้งซ่อมคอมพิวเตอร์ <small>แยกรายเดือน</small></h2>
+                    <div class="card-box table-responsive">
+                        <div class="x_panel">
+                            <div class="x_title">
+                                <h2>สถิติการแจ้งซ่อมคอมพิวเตอร์ <small>แยกรายเดือน</small></h2>
 
-                            <div class="clearfix"></div>
-                        </div>
-                        <div class="x_content">
-                            <canvas id="repair_Chart"></canvas>
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class="x_content">
+                                <canvas id="repair_Chart"></canvas>
+                            </div>
                         </div>
                     </div>
                 </div>
