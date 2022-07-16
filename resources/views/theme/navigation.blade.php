@@ -8,7 +8,7 @@
         <ul class=" navbar-right">
           <li class="nav-item dropdown open" style="padding-left: 15px;">
             <a href="javascript:;" class="user-profile dropdown-toggle" aria-haspopup="true" id="navbarDropdown" data-toggle="dropdown" aria-expanded="false">
-              <img src="/images/img.jpg" alt="">{{ isset(Auth::user()->name) ? Auth::user()->name : 'visitor' }}</a>
+              <img src="/images/img.jpg" alt="">{{ isset(Auth::user()->name) ? Auth::user()->name : 'Guest' }}</a>
             <div class="dropdown-menu dropdown-usermenu pull-right" aria-labelledby="navbarDropdown">
                 @if(isset(Auth::user()->name))
                 <a class="dropdown-item"  href="{{route('profile.edit')}}"> Edit Profile</a>
