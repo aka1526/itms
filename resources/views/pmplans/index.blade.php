@@ -136,7 +136,7 @@
                                         @if($row->pm_status !='Y' )
                                         <td class=" "> <a class="" href="{{route('pmplans.edit', $row->pm_uuid)}}" title="edit/แก้ไข"><i class="fa fa-pencil-square fa-2x" style="color:#1127e9e8" ></i> </a></td>
 
-                                        <td class=" "> <a class="" data-uuid="{{$row->pm_uuid}}" href=""><i class="fa fa-trash-o fa-2x " style="color:red;"></i> </a></td>
+                                        <td class=" "> <a class="btn-delete" data-uuid="{{$row->pm_uuid}}" href=""><i class="fa fa-trash-o fa-2x " style="color:red;"></i> </a></td>
                                          @else
                                          <td class=" "> <a class="" href="/actions/pm/result/{{$row->pm_uuid}}" title="View/ดู"> <i class="fa fa-eye fa-2x" style="color:#d612ac"></i></a></td>
                                          <td class=" "> <i class="fa fa-check fa-2x" style="color:#26B99A"></i></td>
