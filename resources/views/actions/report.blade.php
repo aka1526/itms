@@ -40,7 +40,7 @@
 
                     <div class="x_panel">
                         <div class="x_title">
-                            <h2 align="center">รายงานประวัติการซ่อม-บำรุงรักษา :: {{ $data[0]->fa_name }} </h2>
+                            <h2 align="center">รายงานประวัติการซ่อม-บำรุงรักษา :: {{ $fa->fa_type  }} - {{ $fa->fa_name  }} </h2>
                             <div class="clearfix"></div>
                         </div>
                         <div class="x_content">
