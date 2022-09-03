@@ -17,7 +17,8 @@ class DashboardController extends Controller
 {
     public function index(Request $request){
         $_year=  Carbon::now()->format('Y');
-
+        $ComputerTotal=0;
+        $RepairsTotal=0;
         $fas=Fixasset::select('fa_sec')->selectRaw('count(*)total')
         ->whereIn('fa_type',['NOTEBOOK','PC'])
         ->where('fa_status','=','Y')
@@ -28,6 +29,7 @@ class DashboardController extends Controller
 
                 $fa_label[] =$fa->fa_sec;
                 $fa_data[]  =$fa->total;
+                $ComputerTotal=$ComputerTotal+$fa->total;
 
         }
 
@@ -44,10 +46,12 @@ class DashboardController extends Controller
         $dataset= [];
         $datasetRe= [];
         $tt=12;
-      
+        
+       
  
         foreach ($RepairsYear as $key => $value) {
             $datasetRe[$value->repair_month]=$value->Total ;
+            $RepairsTotal=$RepairsTotal+$value->Total;
         }
 
         for($i = 1; $i<=$tt; $i++) {
@@ -56,7 +60,7 @@ class DashboardController extends Controller
 
   
        //  $dataset=  json_encode($dataset,JSON_NUMERIC_CHECK);
-        return view('dashboard.index', compact('dataset','fa_label','fa_data'));
+        return view('dashboard.index', compact('dataset','fa_label','fa_data','RepairsTotal','ComputerTotal'));
 
     }
 }
