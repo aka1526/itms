@@ -134,7 +134,7 @@
                     data: {
                         labels: {!! json_encode($fa_label) !!},
                         datasets: [{
-                            label: '# of Votes',
+                            label: 'Total',
                             backgroundColor: "#26B99A",
                             data: {!! json_encode($fa_data) !!},
                         }]
@@ -188,7 +188,7 @@
                             "September", "October", "November", "December "
                         ],
                         datasets: [{
-                            label: '# of Votes',
+                            label: 'Total',
                             backgroundColor: "#26B99A",
                             data: {!! json_encode($dataset) !!},
                         }]
