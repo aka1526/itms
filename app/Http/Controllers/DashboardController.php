@@ -38,22 +38,22 @@ class DashboardController extends Controller
         ->groupBy('repair_year')
         ->groupBy('repair_month')
         ->orderBy('repair_month')
-        ->dd()
+        //->dd()
         ->get();
         $tt=12;
         $dataset= [];
         for($i = 1; $i<=$tt; $i++) {
                 foreach ($RepairsYear as $key => $value) {
                     if($i==$value->repair_month){
-                        $dataset[]=($value->Total);
+                        $dataset[]=$value->Total;
                     } else {
-                        $dataset[]=(0);
+                        $dataset[]=0;
                     }
 
                 }
            }
 
-dd($dataset);
+    dd($dataset);
        //  $dataset=  json_encode($dataset,JSON_NUMERIC_CHECK);
         return view('dashboard.index', compact('dataset','fa_label','fa_data'));
 
