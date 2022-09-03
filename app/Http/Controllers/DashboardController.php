@@ -44,16 +44,16 @@ class DashboardController extends Controller
         $dataset= [];
         $tt=12;
         $i =1;
-        for($i = 1; $i<=$tt; $i++) {
+      //  for($i = 1; $i<=$tt; $i++) {
                  foreach ($RepairsYear as $key => $value) {
                 //     if($i==$value->repair_month){
                 //         $dataset[]=$value->Total;
                 //     } else {
-                      $dataset[]= $i==$value->repair_month ? 5 : 0;
+                      $dataset[]=$value->repair_month ? 5 : 0;
                 //     }
 
                  }
-           }
+           //}
 
     dd($dataset);
        //  $dataset=  json_encode($dataset,JSON_NUMERIC_CHECK);
