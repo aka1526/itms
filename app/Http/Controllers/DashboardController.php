@@ -45,23 +45,16 @@ class DashboardController extends Controller
         $datasetRe= [];
         $tt=12;
       
-      // 
-                 foreach ($RepairsYear as $key => $value) {
-                     
-                //     if($i==$value->repair_month){
-                //         $dataset[]=$value->Total;
-                //     } else {
-                      $datasetRe[$value->repair_month]=$value->Total ;
-                      
-                //     }
+ 
+        foreach ($RepairsYear as $key => $value) {
+            $datasetRe[$value->repair_month]=$value->Total ;
+        }
 
-                 }
-                 //dd($datasetRe[6]);
-                 for($i = 1; $i<=$tt; $i++) {
-                    $dataset[]= isset($datasetRe[$i]) ? $datasetRe[$i] : 0;
-                }
+        for($i = 1; $i<=$tt; $i++) {
+         $dataset[]= isset($datasetRe[$i]) ? $datasetRe[$i] : 0;
+        }
 
-    dd($dataset);
+  
        //  $dataset=  json_encode($dataset,JSON_NUMERIC_CHECK);
         return view('dashboard.index', compact('dataset','fa_label','fa_data'));
 
