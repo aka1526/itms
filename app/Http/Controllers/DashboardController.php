@@ -45,14 +45,14 @@ class DashboardController extends Controller
         $tt=12;
         $i =1;
         for($i = 1; $i<=$tt; $i++) {
-                // foreach ($RepairsYear as $key => $value) {
+                 foreach ($RepairsYear as $key => $value) {
                 //     if($i==$value->repair_month){
                 //         $dataset[]=$value->Total;
                 //     } else {
-                      $dataset[]=5;
+                      $dataset[]= $i==$value->repair_month ? 5 : 0;
                 //     }
 
-                // }
+                 }
            }
 
     dd($dataset);
