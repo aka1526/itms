@@ -33,32 +33,27 @@ class DashboardController extends Controller
 
         }
 
-
         $RepairsYear=Historys::select('repair_month')->selectRaw('count(*)Total')
         ->where('data_type','=','REPAIR')
         ->where('repair_year','=',$_year)
         ->groupBy('repair_year')
         ->groupBy('repair_month')
         ->orderBy('repair_month')
-        //->dd()
         ->get();
-       
+
         $dataset= [];
         $datasetRe= [];
-        $tt=12;
-        
-       
- 
+
         foreach ($RepairsYear as $key => $value) {
             $datasetRe[$value->repair_month]=$value->Total ;
             $RepairsTotal=$RepairsTotal+$value->Total;
         }
-
-        for($i = 1; $i<=$tt; $i++) {
+        $tt=11;
+        for($i = 0; $i<=$tt; $i++) {
          $dataset[]= isset($datasetRe[$i]) ? $datasetRe[$i] : 0;
         }
 
-  
+
        //  $dataset=  json_encode($dataset,JSON_NUMERIC_CHECK);
         return view('dashboard.index', compact('dataset','fa_label','fa_data','RepairsTotal','ComputerTotal'));
 
