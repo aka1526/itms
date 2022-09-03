@@ -35,7 +35,7 @@ class DashboardController extends Controller
         $RepairsYear=Historys::select('repair_month')->selectRaw('count(*)Total')
         ->where('data_type','=','REPAIR')
         ->where('repair_year','=',$_year)->groupBy('repair_year')
-        ->groupBy('repair_month')->get();
+        ->groupBy('repair_month')->dd();
         $tt=12;
         $dataset= [];
         for($i = 1; $i<=$tt; $i++) {
