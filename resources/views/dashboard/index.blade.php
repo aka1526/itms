@@ -54,7 +54,7 @@
                 <div class="col-md-6 col-sm-6">
                     <div class="x_panel" >
                         <div class="x_title">
-                            <h2>สถิติการแจ้งซ่อมคอมพิวเตอร์ <small>แยกรายเดือน ทั้งหมด {{ $RepairsTotal}}</small></h2>
+                            <h2>แจ้งซ่อมคอมพิวเตอร์ทั้งหมด ({{ $RepairsTotal}}) <small>แยกรายเดือน </small></h2>
 
                             <div class="clearfix"></div>
                         </div>
