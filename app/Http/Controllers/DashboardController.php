@@ -38,6 +38,7 @@ class DashboardController extends Controller
         ->groupBy('repair_year')
         ->groupBy('repair_month')
         ->orderBy('repair_month')
+        ->dd()
         ->get();
         $tt=12;
         $dataset= [];
