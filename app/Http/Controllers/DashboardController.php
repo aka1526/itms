@@ -40,17 +40,19 @@ class DashboardController extends Controller
         ->orderBy('repair_month')
         //->dd()
         ->get();
-        $tt=12;
+       
         $dataset= [];
+        $tt=12;
+        $i =1;
         for($i = 1; $i<=$tt; $i++) {
-                foreach ($RepairsYear as $key => $value) {
-                    if($i==$value->repair_month){
-                        $dataset[]=$value->Total;
-                    } else {
-                        $dataset[]=0;
-                    }
+                // foreach ($RepairsYear as $key => $value) {
+                //     if($i==$value->repair_month){
+                //         $dataset[]=$value->Total;
+                //     } else {
+                      $dataset[]=5;
+                //     }
 
-                }
+                // }
            }
 
     dd($dataset);
