@@ -10,6 +10,7 @@ use App\Http\Controllers\Members\ProfileController;
 use App\Http\Controllers\Members\ChangePasswordController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PmplansController;
+use App\Http\Controllers\ReqerpController;
 
 Route::controller(DashboardController::class)->group(function () {
     Route::get('dashboards',  'index')->name('dashboard.index');
@@ -32,17 +33,18 @@ Route::controller(RepairsController::class)->group(function () {
 Route::controller(ActionController::class)->group(function () {
     Route::get('actions/act/{uuid}', 'act')->name('ac.act');
     Route::post('actions/repaire', 'repaire')->name('ac.repaire');
-
-    // Route::post('actions/pm', 'pm')->name('ac.pm');
-    // Route::post('actions/pm/savepm', 'savepm')->name('ac.savepm');
-    // Route::get('actions/pm/plan/{uuid}', 'pmplan')->name('ac.pmplan');
-    // Route::post('actions/pm/plan/save', 'pmplansave')->name('ac.pmplansave');
-    // Route::get('actions/pm/result/{uuid}', 'pmresult')->name('ac.pmresult');
-
     Route::post('actions/report', 'report')->name('ac.report');
+    Route::match(array('get', 'post'),'actions/reqerp', 'reqerp')->name('ac.reqerp');
+
 });
 
-
+Route::controller(ReqerpController::class)->group(function () {
+    Route::match(array('get', 'post'),'reqerp', 'index')->name('reqerp.index');
+    Route::match(array('get', 'post'),'reqerp/add', 'add')->name('reqerp.add');
+    Route::post('reqerp/save', 'save')->name('reqerp.save');
+    Route::get('reqerp/edit/{uuid}', 'edit')->name('reqerp.edit');
+    Route::post('reqerp/update', 'update')->name('reqerp.update');
+});
 
 Route::middleware(['auth'])->group(function () {
 /*

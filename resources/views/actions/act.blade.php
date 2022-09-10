@@ -148,7 +148,36 @@
                                     </div>
                                 </form>
                                 </div>
+                                <div class="col-md-4 col-sm-4 profile_details" ">
+                                    <form id="frm_report" name="frm_report" action="/reqerp/add?uuid={{ $data->fa_uuid}}" data-parsley-validate enctype="multipart/form-data" method="POST">
+                                        @csrf
 
+                                        <input type="hidden" id="fa_uuid" class="form-control" name="fa_uuid" value="{{ $data->fa_uuid}}" >
+
+                                    <div class="well profile_view">
+                                      <div class="col-sm-12">
+
+                                        <div class="text-center right col-sm-5 col-md-5">
+                                            <img src="/img/report.png" alt="" width="80px" class="img-circle img-fluid">
+                                          </div>
+                                        <div class="left col-sm-7 col-md-7">
+                                          <h2 class="text-primary">แจ้งเพิ่มเติม-ปรับปรุง ERP</h2>
+                                        </div>
+
+                                      </div>
+                                      <div class="text-center bottom">
+
+                                        <div class=" col-sm-12 emphasis">
+
+
+                                          <button type="submit" class="btn btn-info btn-sm btn-block " data-problem_uuid="">
+                                            <i class="fa fa-print"> </i> รายงานประวัติการซ่อม-บำรุงรักษา
+                                          </button>
+                                        </div>
+                                      </div>
+                                    </div>
+                                </form>
+                                </div>
                                </div>
 
                                 <br />

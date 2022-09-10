@@ -17,6 +17,7 @@ use App\Models\Pmresults;
 use App\Models\Checklists;
 use App\Models\Historys;
 use App\Models\Users;
+use App\Models\Reqerp;
 
 
 class ActionController extends Controller
@@ -290,6 +291,18 @@ class ActionController extends Controller
         return view('actions.report',compact('data','fa'));
 
     }
+
+    public function reqerp(Request $request){
+        $uuid= $request->fa_uuid;
+        $fa =Fixasset::where('fa_uuid','=',$uuid)->first();
+        $data =Reqerp::where('req_unid','!=','')
+        ->orderBy('create_time','desc')
+        ->paginate($this->paging);
+        return view('actions.reqerp',compact('data','fa'));
+
+    }
+
+
 
 
 
