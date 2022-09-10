@@ -19,7 +19,7 @@ class CreateReqerpTable extends Migration
             $table->date('req_date')->nullable();
             $table->string('req_fa')->nullable()->default('');
             $table->string('req_name')->nullable()->default('');
-            $table->longText('req_desc')->nullable()->default('');
+            $table->longText('req_desc')->nullable();
 
             $table->string('req_vote1_name',200)->nullable()->default('');
             $table->string('req_vote2_name',200)->nullable()->default('');
