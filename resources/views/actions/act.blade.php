@@ -161,7 +161,7 @@
                                             <img src="/img/report.png" alt="" width="80px" class="img-circle img-fluid">
                                           </div>
                                         <div class="left col-sm-7 col-md-7">
-                                          <h2 class="text-primary">แจ้งเพิ่มเติม-ปรับปรุง ERP</h2>
+                                          <h2 class="text-primary">แจ้งเพิ่มเติม-ปรับปรุง </h2>
                                         </div>
 
                                       </div>
@@ -171,7 +171,7 @@
 
 
                                           <button type="submit" class="btn btn-info btn-sm btn-block " data-problem_uuid="">
-                                            <i class="fa fa-print"> </i> รายงานประวัติการซ่อม-บำรุงรักษา
+                                            <i class="fa fa-print"> </i> แจ้งเพิ่มเติม-ปรับปรุง ERP
                                           </button>
                                         </div>
                                       </div>
