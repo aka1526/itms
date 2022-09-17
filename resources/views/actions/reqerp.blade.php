@@ -145,11 +145,11 @@
     function getStat($stat=""){
 
         if($stat=="P"){
-            $val='<i class="fa fa-check"></i>';
+            $val='<i class="fa fa-check fa-2x green" ></i>';
         } elseif($stat=="N"){
-            $val='<i class="fa fa-close"></i>';
+            $val='<i class="fa fa-close fa-2x red"></i>';
         } else {
-            $val='<i class="fa fa-question"></i>';
+            $val='<i class="fa fa-question fa-2x yellow"></i>';
         }
 
         return  $val;

@@ -81,6 +81,19 @@
                                     <label for="end_date">End Date</label>
                                     <input type="date" id="end_date" name="end_date" class="form-control"  value="{{ $dataset->end_date}}"   >
                                 </div>
+
+                            <div class="col-md-3">
+                                    <label for="end_date">Status :</label>
+                                        <select id="req_vote_stat" name="req_vote_stat" class="form-control" >
+                                        <option value="">Choose..</option>
+                                        <option value="P" {{$dataset->req_vote_stat=="P" ? 'selected' : ''}}>Pass</option>
+                                        <option value="N" {{$dataset->req_vote_stat=="N" ? 'selected' : ''}}>Not Pass</option>
+
+                                    </select>
+                                </div>
+
+
+
                                 <div class="col-md-3">
                                     <label for="jobpercen">% ความคืบหน้า</label>
                                     <input type="number" id="jobpercen" name="jobpercen" class="form-control"  value="{{ $dataset->jobpercen}}"   >

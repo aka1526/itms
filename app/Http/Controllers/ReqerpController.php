@@ -123,6 +123,7 @@ class ReqerpController extends Controller
         $start_date= isset($request->start_date)  ? $request->start_date : null;
         $end_date= isset($request->end_date)  ? $request->end_date : null;
         $jobpercen= isset($request->jobpercen)  ? $request->jobpercen : '0';
+        $req_vote_stat= isset($request->req_vote_stat)  ? $request->req_vote_stat : '';
 
 
         $create_by ='admin';
@@ -137,6 +138,7 @@ class ReqerpController extends Controller
             ,"start_date" => $start_date
             ,"end_date" => $end_date
             ,"jobpercen" =>  $jobpercen
+            ,"req_vote_stat" =>$req_vote_stat
             ,'modify_by'=> $modify_by
            ,'modify_time'=> $modify_time
         ]);
