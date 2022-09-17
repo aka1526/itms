@@ -97,9 +97,9 @@
                                                     <div class="progress-bar progress-bar-striped
                                                     @if($item->jobpercen>=100)
                                                         bg-success
-                                                    @elseif ($item->jobpercen>80)
+                                                    @elseif ($item->jobpercen>=80)
                                                         bg-primary
-                                                    @elseif ($item->jobpercen>10)
+                                                    @elseif ($item->jobpercen>=50)
                                                         bg-purple
                                                     @else
                                                         bg-dark
