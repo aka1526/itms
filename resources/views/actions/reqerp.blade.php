@@ -65,14 +65,11 @@
                                                 <td >ผู้ร้องขอ</td>
                                                 <td >หัวข้อ/เรื่อง</td>
                                                 <td >เหตุผลประกอบ</td>
-                                                <td >ผุ้พิจารณา 1</td>
-                                                <td >ผล</td>
-                                                <td >ผุ้พิจารณา 2</td>
-                                                <td >ผล</td>
-                                                <td >ผุ้พิจารณา 3</td>
-                                                <td >ผล</td>
-                                                <td >ผลการพิจารณา</td>
 
+                                                <td >ผลการพิจารณา</td>
+                                                <td >วันที่เริ่ม</td>
+                                                <td >กำหนดเสร็จ</td>
+                                                <td >% ความคืบหน้า</td>
                                               </tr>
 
 
@@ -81,17 +78,27 @@
                                      <tr>
                                         <td class=""> {{ $data->firstItem() + $key }}</td>
                                         <td>{{ \Carbon\Carbon::parse($item->req_date )->format('d-m-Y');}}</td>
-                                        <td class="text-center">{{ $item->req_name}}</td>
-                                        <td class="text-center">{{ $item->req_title}}</td>
-                                        <td class="text-center">{{ $item->req_desc}}</td>
-                                        <td>{{ $item->req_vote1_name}}</td>
-                                        <td align="center"> {!! getStat($item->req_vote1_stat)!!}</td>
-                                        <td>{{ $item->req_vote2_name}}</td>
-                                        <td align="center"> {!! getStat($item->req_vote2_stat)!!}</td>
-                                        <td>{{ $item->req_vote3_name}}</td>
-                                        <td align="center"> {!!getStat($item->req_vote3_stat)!!}</td>
-                                        <td align="center"> {!! getStat($item->req_vote_stat) !!}</td>
+                                        <td class="text-left">{{ $item->req_name}}</td>
+                                        <td class="text-left">{{ $item->req_title}}</td>
+                                        <td class="text-left">{{ $item->req_desc}}</td>
 
+                                        <td align="center"> {!! getStat($item->req_vote_stat) !!}</td>
+                                        <td align="center">{{ $item->start_date}} </td>
+                                        <td align="center">{{ $item->start_date}} </td>
+                                        <td align="center">
+                                            <div class="widget_summary">
+
+                                                <div class="w_center " style="width: 100%;">
+                                                  <div class="progress">
+                                                    <div class="progress-bar bg-green" role="progressbar" aria-valuenow="{{ $item->jobpercen}}" aria-valuemin="0" aria-valuemax="100" style="width: {{ $item->jobpercen}}%;">
+                                                      <span class="sr-only-focusable">{{ $item->jobpercen}}%</span>
+                                                    </div>
+                                                  </div>
+                                                </div>
+
+                                                <div class="clearfix"></div>
+                                              </div>
+                                        </td>
                                       </tr>
                                      @endforeach
                                     </tbody>

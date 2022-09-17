@@ -27,8 +27,7 @@
       <ul class="nav side-menu">
         <li><a><i class="fa fa-desktop"></i>ค่าระบบพื้นฐาน<span class="fa fa-chevron-down"></span></a>
           <ul class="nav child_menu">
-
-
+            <li><a href="/erpapp">ผู้พิจารณา ERP</a></li>
             <li><a href="/problems">ข้อมูลปัญหา</a></li>
             <li><a href="/periods">ข้อมูลรอบเวลา</a></li>
             <li><a href="/checklists">ข้อมูล Check List </a></li>
