@@ -18,6 +18,7 @@ use App\Models\Checklists;
 use App\Models\Historys;
 use App\Models\Users;
 use App\Models\Reqerp;
+use Phattarachai\LineNotify\Facade\Line;
 
 class ReqerpController extends Controller
 {
@@ -90,6 +91,10 @@ class ReqerpController extends Controller
                 , 'modify_by' =>$modify_by
                 , 'modify_time' =>$modify_time
             ]);
+    if($act){
+        Line::send("\n".'ขอปรับปรุง ERP : '.$fa_user."\n".' วันที่: '.$req_date ."\n".' เรื่อง : '.$req_title ."\n".' รายละเอียด :'. $req_desc);
+
+    }
 
        // $fa =Fixasset::where('fa_uuid','=',$fa_uuid)->first();
 
