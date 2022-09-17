@@ -85,12 +85,12 @@
                                         <td class="text-center">{{ $item->req_title}}</td>
                                         <td class="text-center">{{ $item->req_desc}}</td>
                                         <td>{{ $item->req_vote1_name}}</td>
-                                        <td>{{ $item->req_vote1_stat}}</td>
+                                        <td align="center"> {!! getStat($item->req_vote1_stat)!!}</td>
                                         <td>{{ $item->req_vote2_name}}</td>
-                                        <td>{{ $item->req_vote2_stat}}</td>
+                                        <td align="center"> {!! getStat($item->req_vote2_stat)!!}</td>
                                         <td>{{ $item->req_vote3_name}}</td>
-                                        <td>{{ $item->req_vote3_stat}}</td>
-                                        <td>{{ $item->req_vote_stat}}</td>
+                                        <td align="center"> {!!getStat($item->req_vote3_stat)!!}</td>
+                                        <td align="center"> {!! getStat($item->req_vote_stat) !!}</td>
 
                                       </tr>
                                      @endforeach
@@ -116,6 +116,21 @@
         </div>
     </div>
     @endsection
+@php
+    function getStat($stat=""){
+
+        if($stat=="P"){
+            $val='<i class="fa fa-check"></i>';
+        } elseif($stat=="N"){
+            $val='<i class="fa fa-close"></i>';
+        } else {
+            $val='<i class="fa fa-question"></i>';
+        }
+
+        return  $val;
+
+    }
+@endphp
 
     @section('footer_jscss')
     <!-- jQuery -->
