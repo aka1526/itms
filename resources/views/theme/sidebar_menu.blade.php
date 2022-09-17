@@ -5,6 +5,10 @@
             <li><a  href="/dashboards"><i class="fa fa-bar-chart"></i>สถิติแจ้งซ่อม </a>
             </li>
         </ul>
+        <ul class="nav side-menu">
+            <li><a  href="/actions/reqerp"><i class="fa fa-cubes"></i>ขอปรับปรุง ERP </a>
+            </li>
+        </ul>
         @if(isset(Auth::user()->name))
 
         <ul class="nav side-menu">
