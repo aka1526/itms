@@ -96,13 +96,13 @@
                                                   <div class="progress">
                                                     <div class="progress-bar progress-bar-striped
                                                     @if($item->jobpercen>=100)
-                                                     bg-success
+                                                        bg-success
                                                     @elseif ($item->jobpercen>80)
                                                         bg-primary
                                                     @elseif ($item->jobpercen>10)
-                                                     bg-warning
+                                                        bg-purple
                                                     @else
-                                                     bg-dark
+                                                        bg-dark
                                                     @endif
                                                     " role="progressbar" aria-valuenow="{{ $item->jobpercen}}" aria-valuemin="0" aria-valuemax="100" style="width: {{ $item->jobpercen}}%;">
                                                       <span class="sr-only-focusable">{{ $item->jobpercen}}%</span>
