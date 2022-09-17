@@ -88,13 +88,23 @@
 
                                         <td align="center"> {!! getStat($item->req_vote_stat) !!}</td>
                                         <td align="center">{{ $item->start_date}} </td>
-                                        <td align="center">{{ $item->start_date}} </td>
+                                        <td align="center">{{ $item->end_date}} </td>
                                         <td align="center">
                                             <div class="widget_summary">
 
                                                 <div class="w_center " style="width: 100%;">
                                                   <div class="progress">
-                                                    <div class="progress-bar bg-green" role="progressbar" aria-valuenow="{{ $item->jobpercen}}" aria-valuemin="0" aria-valuemax="100" style="width: {{ $item->jobpercen}}%;">
+                                                    <div class="progress-bar progress-bar-striped
+                                                    @if($item->jobpercen>=100)
+                                                     bg-success
+                                                    @elseif ($item->jobpercen>80)
+                                                        bg-primary
+                                                    @elseif ($item->jobpercen>10)
+                                                     bg-warning
+                                                    @else
+                                                     bg-dark
+                                                    @endif
+                                                    " role="progressbar" aria-valuenow="{{ $item->jobpercen}}" aria-valuemin="0" aria-valuemax="100" style="width: {{ $item->jobpercen}}%;">
                                                       <span class="sr-only-focusable">{{ $item->jobpercen}}%</span>
                                                     </div>
                                                   </div>
@@ -104,7 +114,7 @@
                                               </div>
                                         </td>
                                         @if(isset(Auth::user()->name))
-                                        <td align="center"> <a href="{{ 'reqerp/edit/'. $item->req_unid }}"   class="btn btn-success btn-sm">Edit</a></td>
+                                        <td align="center"> <a href="{{ '/reqerp/edit/'. $item->req_unid }}"   class="btn btn-success btn-sm">Edit</a></td>
                                         @endif
 
                                       </tr>

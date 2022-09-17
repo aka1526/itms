@@ -105,4 +105,46 @@ class ReqerpController extends Controller
         return Redirect::to('/actions/reqerp');
     }
 
+    public function edit(Request $request,$req_unid){
+
+        $dataset =Reqerp::where('req_unid','=',$req_unid)->first();
+        $fa =Fixasset::where('fa_uuid','=', $dataset->req_fa)->first();
+         return view('reqerp.edit',compact('dataset','fa'));
+
+    }
+
+    public function update(Request $request){
+
+        $req_unid= isset($request->req_unid)  ? $request->req_unid  : '';
+        $fa_name= isset($request->fa_name)  ? $request->fa_name : '';
+        $fa_user= isset($request->fa_user)  ? $request->fa_user : '';
+        $req_title= isset($request->req_title)  ? $request->req_title : '';
+        $req_desc= isset($request->req_desc)  ? $request->req_desc : '';
+        $start_date= isset($request->start_date)  ? $request->start_date : null;
+        $end_date= isset($request->end_date)  ? $request->end_date : null;
+        $jobpercen= isset($request->jobpercen)  ? $request->jobpercen : '0';
+
+
+        $create_by ='admin';
+        $create_time =Carbon::now()->format("Y-m-d H:i:s");
+        $modify_by='admin';
+        $modify_time=Carbon::now()->format("Y-m-d H:i:s");
+
+        $act = Reqerp::where('req_unid','=',$req_unid)->update([
+            "req_name"=> $fa_user
+            ,"req_title" =>$req_title
+            ,"req_desc" => $req_desc
+            ,"start_date" => $start_date
+            ,"end_date" => $end_date
+            ,"jobpercen" =>  $jobpercen
+            ,'modify_by'=> $modify_by
+           ,'modify_time'=> $modify_time
+        ]);
+
+        return Redirect::to('/actions/reqerp')->with('msg', $act);
+
+    }
+
+
+
 }

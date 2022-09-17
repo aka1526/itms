@@ -39,49 +39,55 @@
                 <div class="col-md-12 col-sm-12 ">
                   <div class="x_panel">
                         <div class="x_title">
-                            <h2 align="center">ข้อมูลคอมพิวเตอร์/อุปกรณ์</h2>
+                            <h2 align="center">ขอเพิ่มเติม-ปรับปรุงระบบ ERP</h2>
                             <div class="clearfix"></div>
                         </div>
                         <div class="x_content">
 
                             <!-- start form for validation -->
-                            <form id="form-post" name="form-post" action="{{ route('pb.update')}}" data-parsley-validate enctype="multipart/form-data" method="POST">
+                            <form id="form-post" name="form-post" action="{{ route('reqerp.update')}}" data-parsley-validate enctype="multipart/form-data" method="POST">
                                @csrf
-                               <input type="hidden" id="problem_uuid" class="form-control" name="problem_uuid" value="{{ $dataset->problem_uuid}}" >
+                               <input type="hidden" class="form-control" name="req_unid"   id="req_unid"  value="{{ $dataset->req_unid}}" >
+                               <input type="hidden" class="form-control" name="fa_uuid"   id="fa_uuid"  value="{{ $fa->fa_uuid}}" >
                                <div class="row">
 
                                 <div class="col-md-3">
-                                    <label for="com_name">รหัสปัญหา</label>
-                                    <input type="text" id="problem_code" class="form-control" name="problem_code"  value="{{ $dataset->problem_code}}" required="" >
+                                    <label for="fa_name">COMPUTER</label>
+                                    <input type="text" id="fa_name" class="form-control" name="fa_name" value="{{ $fa->fa_name}}"  readonly >
                                 </div>
                                 <div class="col-md-9">
-                                    <label for="problem_name">ชื่อปัญหา</label>
-                                    <input type="text" id="problem_name" class="form-control" name="problem_name" value="{{ $dataset->problem_name}}" required="" >
+                                    <label for="fa_user">ชื่อผุ้ร้องขอ</label>
+                                    <input type="text" id="fa_user" class="form-control" name="fa_user"  value="{{ $dataset->req_name}}" required=""  {{ $dataset->req_name =="" ? '' : 'readonly'}}>
                                 </div>
 
-                                <div class="col-md-3">
-                                    <label for="group">กลุ่มปัญหา</label>
-                                    <select class="form-control" id="group" name="group"  class="form-control" required="">
-                                        <option value="">Choose option</option>
-                                        <option value="COMPUTER" {{ $dataset->group=='COMPUTER' ? ' selected' : '' }}>Computer/Noterbook</option>
-                                        <option value="PRINTER" {{ $dataset->group=='PRINTER' ? ' selected' : '' }}>Printer</option>
-                                        <option value="NETWORK" {{ $dataset->group=='NETWORK' ? ' selected' : '' }}>Network</option>
-                                    </select>
+
+
+                                <div class="col-md-12 col-sm-12">
+                                    <label for="com_name">หัวข้อ/เรื่อง</label>
+                                    <input type="text" id="req_title" name="req_title"  class="form-control" required="" value="{{ $dataset->req_title}}" placeholder="หัวข้อ/เรื่อง">
                                 </div>
+                                <div class="col-md-12 col-sm-12">
+                                    <label class="control-label col-md-3 col-sm-3 ">เหตุผลประกอบการพิจารณา <span class="required">*</span>
+                                    </label>
 
+                                        <textarea class="form-control" rows="5" id="req_desc" name="req_desc"   placeholder="เหตุผลประกอบการพิจารณา" required="">{{ $dataset->req_desc}}</textarea>
+
+                                </div>
                                 <div class="col-md-3">
-                                    <label for="problems_status">สถานะ</label>
-                                    <select class="form-control" id="problems_status" name="problems_status">
-
-                                        <option value="Y" {{ $dataset->problems_status=='Y' ? ' selected' : '' }}>แสดง</option>
-                                        <option value="N" {{ $dataset->problems_status!='Y' ? ' selected' : '' }}>ซ่อน</option>
-
-                                    </select>
+                                    <label for="start_date">Start Date</label>
+                                    <input type="date" id="start_date" name="start_date" class="form-control"  value="{{ $dataset->start_date}}"   >
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="end_date">End Date</label>
+                                    <input type="date" id="end_date" name="end_date" class="form-control"  value="{{ $dataset->end_date}}"   >
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="jobpercen">% ความคืบหน้า</label>
+                                    <input type="number" id="jobpercen" name="jobpercen" class="form-control"  value="{{ $dataset->jobpercen}}"   >
                                 </div>
                                </div>
-
                                 <br />
-                                <a href="/problems"   class="btn btn-secondary"> <i class="fa fa-arrow-left"></i> กลับ </a>
+                                <a href="/actions/reqerp"   class="btn btn-secondary"> <i class="fa fa-arrow-left"></i> กลับ </a>
                                 <button type="submit" class="btn btn-success"><i class="fa fa-save"></i> บันทึกข้อมูล</button>
 
                             </form>
