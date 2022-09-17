@@ -66,8 +66,11 @@
                                                 <td >หัวข้อ/เรื่อง</td>
                                                 <td >เหตุผลประกอบ</td>
                                                 <td >ผุ้พิจารณา 1</td>
+                                                <td >ผล</td>
                                                 <td >ผุ้พิจารณา 2</td>
-                                                <td >ผุ้พิจารณา 2</td>
+                                                <td >ผล</td>
+                                                <td >ผุ้พิจารณา 3</td>
+                                                <td >ผล</td>
                                                 <td >ผลการพิจารณา</td>
 
                                               </tr>
@@ -82,9 +85,13 @@
                                         <td class="text-center">{{ $item->req_title}}</td>
                                         <td class="text-center">{{ $item->req_desc}}</td>
                                         <td>{{ $item->req_vote1_name}}</td>
+                                        <td>{{ $item->req_vote1_stat}}</td>
                                         <td>{{ $item->req_vote2_name}}</td>
+                                        <td>{{ $item->req_vote2_stat}}</td>
                                         <td>{{ $item->req_vote3_name}}</td>
-                                        <td>PASS</td>
+                                        <td>{{ $item->req_vote3_stat}}</td>
+                                        <td>{{ $item->req_vote_stat}}</td>
+
                                       </tr>
                                      @endforeach
                                     </tbody>

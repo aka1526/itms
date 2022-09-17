@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class Addcol0009ToTable extends Migration
+class Addcol0010ToTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,7 +14,7 @@ class Addcol0009ToTable extends Migration
     public function up()
     {
         Schema::table('reqerp', function (Blueprint $table) {
-              $table->string('req_title')->nullable();
+              $table->string('req_vote_stat',50)->nullable();
 
         });
 
