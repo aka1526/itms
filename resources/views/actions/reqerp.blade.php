@@ -70,6 +70,10 @@
                                                 <td >วันที่เริ่ม</td>
                                                 <td >กำหนดเสร็จ</td>
                                                 <td >% ความคืบหน้า</td>
+                                                @if(isset(Auth::user()->name))
+                                                <td >Act.</td>
+                                                @endif
+
                                               </tr>
 
 
@@ -99,6 +103,10 @@
                                                 <div class="clearfix"></div>
                                               </div>
                                         </td>
+                                        @if(isset(Auth::user()->name))
+                                        <td align="center"> <a href="{{ 'reqerp/edit/'. $item->req_unid }}"   class="btn btn-success btn-sm">Edit</a></td>
+                                        @endif
+
                                       </tr>
                                      @endforeach
                                     </tbody>
