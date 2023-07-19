@@ -54,7 +54,7 @@
                 <div class="col-md-6 col-sm-6">
                     <div class="x_panel" >
                         <div class="x_title">
-                            <h2>แจ้งซ่อมคอมพิวเตอร์ ประจำปี {{$year}} จำนวน ({{ $RepairsTotal}}) ครั้ง <small>แยกรายเดือน </small></h2>
+                            <h2>แจ้งซ่อมคอมพิวเตอร์ ประจำปี {{$year}} จำนวน ({{ $RepairsTotal}}) ครั้ง </h2>
                             <div class="col-md-4 col-sm-4 ">
                                 <select class="form-control" id="year" name="year"  >
                                     @php 
