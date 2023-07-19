@@ -16,7 +16,9 @@ use App\Models\Historys;
 class DashboardController extends Controller
 {
     public function index(Request $request){
-        $_year=  Carbon::now()->format('Y');
+       
+        $year= isset($request->year) ? $request->year :  Carbon::now()->format('Y');
+
         $ComputerTotal=0;
         $RepairsTotal=0;
         $fas=Fixasset::select('fa_sec')->selectRaw('count(*)total')
@@ -35,7 +37,7 @@ class DashboardController extends Controller
 
         $RepairsYear=Historys::select('repair_month')->selectRaw('count(*)Total')
         ->where('data_type','=','REPAIR')
-        ->where('repair_year','=',$_year)
+        ->where('repair_year','=',$year)
         ->groupBy('repair_year')
         ->groupBy('repair_month')
         ->orderBy('repair_month')
@@ -55,7 +57,7 @@ class DashboardController extends Controller
 
 
        //  $dataset=  json_encode($dataset,JSON_NUMERIC_CHECK);
-        return view('dashboard.index', compact('dataset','fa_label','fa_data','RepairsTotal','ComputerTotal'));
+        return view('dashboard.index', compact('year','dataset','fa_label','fa_data','RepairsTotal','ComputerTotal'));
 
     }
 }
