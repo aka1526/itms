@@ -55,7 +55,20 @@
                     <div class="x_panel" >
                         <div class="x_title">
                             <h2>แจ้งซ่อมคอมพิวเตอร์ ประจำปี {{$year}} จำนวน ({{ $RepairsTotal}}) ครั้ง <small>แยกรายเดือน </small></h2>
-
+                            <div class="col-md-4 col-sm-4 ">
+                                <select class="form-control" id="year" name="year"  >
+                                    @php 
+                                    $y=date('Y')
+                                     @endphp
+                                    <option>Choose option</option>
+                                   
+                                    @for ($i = 2022; $i <= $y; $i++)
+                                    <option value="{{$i}}" {{$year==$i ? ' selected' : ''}}>{{$i}}</option>
+                                   
+                                    @endfor
+                            
+                                </select>
+                            </div>
                             <div class="clearfix"></div>
                         </div>
                         <div class="x_content">
@@ -263,6 +276,13 @@
     </script>
 
     <script>
+
+$('#year').on('change', function(){
+    var url ="?year="+$(this).val();
+    
+    window.location.href = url;
+});
+
         $(document).on("click", '.btn-delete', function(e) {
             e.preventDefault();
 

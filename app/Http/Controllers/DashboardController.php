@@ -41,6 +41,7 @@ class DashboardController extends Controller
         ->groupBy('repair_year')
         ->groupBy('repair_month')
         ->orderBy('repair_month')
+        //->dd()
         ->get();
 
         $dataset= [];
@@ -50,8 +51,8 @@ class DashboardController extends Controller
             $datasetRe[$value->repair_month]=$value->Total ;
             $RepairsTotal=$RepairsTotal+$value->Total;
         }
-        $tt=11;
-        for($i = 0; $i<=$tt; $i++) {
+        $tt=12;
+        for($i = 1; $i<=$tt; $i++) {
          $dataset[]= isset($datasetRe[$i]) ? $datasetRe[$i] : 0;
         }
 
