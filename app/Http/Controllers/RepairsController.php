@@ -49,11 +49,25 @@ class RepairsController extends Controller
     public function add(Request $request,$uuid){
 
         $data =Fixasset::where('fa_uuid','=',$uuid)->first();
+
+        $repair_year =Carbon::now()->format("Y");
+        $repair_month =Carbon::now()->format("n");
+
+        $Repairs=Repairs::where('fa_uuid',$uuid)
+        ->where('repair_year','=',$repair_year)
+        ->where('repair_month','=',$repair_month)
+        ->where('repair_status','!=','DONE')
+        ->first();
+
         $group= $data->fa_type;
         if( $group=="PC" ||  $group=="NOTEBOOK"){
             $problems =Problems::where('group','=','COMPUTER')->orderBy('problem_name')->get();
         } else {
             $problems =Problems::where('group','!=','COMPUTER')->orderBy('problem_name')->get();
+        }
+
+        if($Repairs){
+            return view('repairs.ready',compact('data','Repairs'));
         }
 
         if($data){

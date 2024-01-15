@@ -75,7 +75,7 @@
                                             <div class="input-group mb-3">
                                                 <select class="form-control form-control-sm" id="pm_year" name="pm_year" >
                                                     <option>Choose..</option>
-                                                    {{ $last= date('Y') }}
+                                                    {{ $last= date('Y')-1 }}
                                                     {{ $now = date('Y')+1 }}
 
                                                     @for ($i = $now; $i >= $last; $i--)
@@ -242,6 +242,9 @@
             init_autocomplete();
             $('#menu_toggle').click();
             });
+
+          
+
     </script>
 
 <script>
