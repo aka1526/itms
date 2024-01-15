@@ -120,11 +120,13 @@
                                     <tr class="headings">
 
                                       <th class="column-title">ลำดับ </th>
-                                      <th class="column-title">วันที่ตามแผน</th>
+
                                       <th class="column-title">ชื่อคอมพิวเตอร์</th>
                                       <th class="column-title">ชื่อผู้ใช้</th>
                                       <th class="column-title">ประเภท</th>
                                       <th class="column-title">แผนก</th>
+                                      <th class="column-title">วันที่ตามแผน</th>
+
                                       <th class="column-title">วันที่ดำเนินการ</th>
                                       <th class="column-title">ผู้ดำเนินการ </th>
                                       <th class="column-title">View</th>
@@ -141,13 +143,15 @@
                                     <tr class="even pointer">
 
                                         <td class=" "> {{ $dataset->firstItem() + $key }}</td>
-                                        <td class=" ">{{ \Carbon\Carbon::parse($row->pm_date )->format('d-m-Y');}}</td>
+
                                         <td class=" "> {{ $row->fa_name }}</td>
                                         <td class=" "> {{ $row->fa_user }}</td>
 
                                         <td class=" "> {{ $row->fa_type }}</td>
                                         <td class=" "> {{ $row->fa_sec }}</td>
-                                        <td class=" "> {{ $row->pm_act_date }}</td>
+                                        <td class=" ">{{ \Carbon\Carbon::parse($row->pm_date )->format('d-m-Y');}}</td>
+                                        <td class=" ">{{ isset($row->pm_act_date) ? \Carbon\Carbon::parse($row->pm_act_date )->format('d-m-Y') : ''}}</td>
+
                                         <td class=" "> {{ $row->pm_by }}</td>
                                         @if($row->pm_status !='Y' )
                                         <td class=" "> <a class="" href="{{route('pmplans.edit', $row->pm_uuid)}}" title="edit/แก้ไข"><i class="fa fa-pencil-square fa-2x" style="color:#1127e9e8" ></i> </a></td>
@@ -243,7 +247,7 @@
             $('#menu_toggle').click();
             });
 
-          
+
 
     </script>
 

@@ -22,6 +22,7 @@ class Pmplans extends Model
         , 'pm_year'
         , 'pm_month'
         , 'fa_uuid'
+        , 'pm_sec'
         , 'pm_act_date'
         , 'pm_status'
         , 'pm_by'

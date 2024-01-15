@@ -23,6 +23,42 @@ class PmplansController extends Controller
         $pm_year=isset($request->pm_year) ? $request->pm_year : Carbon::now()->format('Y');
         $pm_month=isset($request->pm_month) && $request->pm_month>0 ? $request->pm_month : 0;
 
+        $pmCount =Pmplans::where('pm_year','=',$pm_year)->count();
+
+        if($pmCount==0){
+                $Fixasset=Fixasset::where('fa_status','Y')
+                ->whereIn('fa_type',['PC','NOTEBOOK'])->get();
+                foreach($Fixasset as $key=>$fa){
+                    $pm_date    =  Carbon::now()->format('Y-m-d');
+                    $pm_year    =  Carbon::parse($pm_date)->format('Y');
+                    $pm_month   =  Carbon::parse($pm_date)->format('n');
+                    $currentuser = auth()->user();
+
+                    $create_by =$currentuser->name;
+                    $create_time =Carbon::now()->format("Y-m-d H:i:s");
+                    $modify_by=$currentuser->name;
+                    $modify_time=Carbon::now()->format("Y-m-d H:i:s");
+
+
+                    $_uuid= str_replace('-','',Str::uuid());
+                    $act=  Pmplans::insert([
+                       'pm_uuid'       =>$_uuid
+                       , 'pm_date'     => $pm_date
+                       , 'pm_year'     =>$pm_year
+                       , 'pm_month'    =>$pm_month
+                       , 'fa_uuid'     =>$fa->fa_uuid
+                       , 'pm_act_date' =>null
+                       , 'pm_status'   =>'N'
+                       , 'pm_sec'       =>$fa->fa_sec
+                       , 'pm_by'        =>''
+                       , 'create_by'   =>$create_by
+                       , 'create_time' =>$create_time
+                       , 'modify_by'   =>$modify_by
+                       , 'modify_time' =>$modify_time
+                   ]);
+                }
+        }
+
         $dataset =Pmplans::where('pm_year','=',$pm_year)
         ->leftJoin("fixasset", "fixasset.fa_uuid", "=", "pmplans.fa_uuid")
         ->where(function($query) use ($search) {
@@ -95,6 +131,7 @@ class PmplansController extends Controller
                 , 'pm_act_date' =>null
                 , 'pm_status'   =>'N'
                 , 'pm_by'        =>''
+                , 'pm_sec'       =>$fa->fa_sec
                 , 'create_by'   =>$create_by
                 , 'create_time' =>$create_time
                 , 'modify_by'   =>$modify_by
@@ -118,9 +155,16 @@ class PmplansController extends Controller
     public function update(Request $request){
         $pm_uuid =isset($request->pm_uuid) ? $request->pm_uuid : '';
 
+        $Pmplans=Pmplans::where('pm_uuid',$pm_uuid)->first();
+        $fa_uuid = $Pmplans->fa_uuid;
+
+        $Fixasset =Fixasset::where('fa_uuid','=',$fa_uuid)->first();
+        $fa_sec = $Fixasset->fa_sec;
         $pm_date_new=isset($request->pm_date_new) ? $request->pm_date_new : '';
         $pm_date_new= Carbon::parse($pm_date_new)->format('Y-m-d');
-        $act= Pmplans::where('pm_uuid','=',$pm_uuid)->update([
+        $pm_year   = Carbon::parse($pm_date_new)->format('Y');
+
+        $act= Pmplans::where('pm_sec','=',$fa_sec)->where('pm_year',$pm_year)->update([
             'pm_date' => $pm_date_new
         ]);
 

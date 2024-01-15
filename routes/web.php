@@ -21,6 +21,7 @@ Route::controller(RepairsController::class)->group(function () {
     Route::match(array('get', 'post'), '/repairs', 'index')->name('re.index');
     Route::get('repairs/online/{uuid}',  'online')->name('re.online');
     Route::get('repairs/add/{uuid}', 'add')->name('re.add');
+    Route::get('repairs/add2/{uuid}', 'add2')->name('re.add2');
     Route::get('repairs/online/{uuid}', 'online')->name('re.online');
     Route::get('repairs/success', 'success')->name('re.success');
     Route::post('repairs/job/rec', 'recjob')->name('re.recjob');

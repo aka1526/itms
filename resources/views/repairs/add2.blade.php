@@ -54,12 +54,12 @@
                                <div class="row">
 
                                 <div class="col-md-3">
-                                    <label for="com_name">คอมพิวเตอร์/อุปกรณ์</label>
+                                    <label for="fa_name">คอมพิวเตอร์/อุปกรณ์</label>
                                     <input type="text" id="fa_name" class="form-control" name="fa_name" required="" value="{{ $data->fa_name}}" readonly>
                                 </div>
                                 <div class="col-md-3">
                                     <label for="repair_date">วันที่แจ้ง</label>
-                                    <input type="text" id="repair_date" class="form-control" name="repair_date" value="{{ \Carbon\Carbon::now()->format('d/m/Y')}}"  readonly>
+                                    <input type="date" id="repair_date" class="form-control" name="repair_date" value="{{ \Carbon\Carbon::now()->format('d/m/Y')}}"   >
                                 </div>
                                 <div class="col-md-6">
                                     <label for="fa_user">ผู้แจ้งซ่อม</label>

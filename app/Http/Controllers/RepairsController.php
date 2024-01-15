@@ -79,6 +79,33 @@ class RepairsController extends Controller
         return response()->view('errors.404',compact('data'),404);
 
     }
+    public function add2(Request $request,$uuid){
+
+        $data =Fixasset::where('fa_uuid','=',$uuid)->first();
+
+        $repair_year =Carbon::now()->format("Y");
+        $repair_month =Carbon::now()->format("n");
+
+
+
+        $group= $data->fa_type;
+        if( $group=="PC" ||  $group=="NOTEBOOK"){
+            $problems =Problems::where('group','=','COMPUTER')->orderBy('problem_name')->get();
+        } else {
+            $problems =Problems::where('group','!=','COMPUTER')->orderBy('problem_name')->get();
+        }
+
+
+
+        if($data){
+            return view('repairs.add2',compact('data','problems'));
+        }
+
+        $data['title'] = '404';
+        $data['name'] = 'Page not found';
+        return response()->view('errors.404',compact('data'),404);
+
+    }
 
     public function success(Request $request){
      return view('repairs.success');
