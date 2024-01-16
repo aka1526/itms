@@ -14,7 +14,7 @@ class Addcol0012ToTable extends Migration
     public function up()
     {
         Schema::table('pmplans', function (Blueprint $table) {
-              $table->string('fa_sec',50)->nullable();
+              $table->string('pm_sec',50)->nullable();
 
         });
 

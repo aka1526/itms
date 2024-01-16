@@ -163,9 +163,10 @@ class PmplansController extends Controller
         $pm_date_new=isset($request->pm_date_new) ? $request->pm_date_new : '';
         $pm_date_new= Carbon::parse($pm_date_new)->format('Y-m-d');
         $pm_year   = Carbon::parse($pm_date_new)->format('Y');
-
+        $pm_month   = Carbon::parse($pm_date_new)->format('n');
         $act= Pmplans::where('pm_sec','=',$fa_sec)->where('pm_year',$pm_year)->update([
             'pm_date' => $pm_date_new
+            ,'pm_month'=>$pm_month
         ]);
 
         return Redirect::to(route('pmplans.index'))->with('msg', $act);
